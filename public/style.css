@@ -8,10 +8,14 @@ body {
 aside {
 	max-width: 400px;
 	margin: auto;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
 }
 .msg {
-	position: fixed;
-	top: 2em;
+/* 	position: fixed;
+	top: 2em; */
 	border: 1px solid red;
 	font-weight: bold;
 	background-color: white;
@@ -82,11 +86,7 @@ article {
 	float: left; */
 }
 
-aside {
-	/* background-color: yellow;
-	float: right; */
-	width: 50vw;
-}
+
 
 main a {
 	color: black;

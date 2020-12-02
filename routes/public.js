@@ -3,21 +3,25 @@ import Router from 'koa-router'
 import bodyParser from 'koa-body'
 
 const router = new Router()
-router.use(bodyParser({multipart: true}))
+router.use(bodyParser({ multipart: true }))
 
 import Accounts from '../modules/accounts.js'
+import Items from '../modules/items.js'
 const dbName = 'website.db'
 
 /**
- * The secure home page.
+ * The home page.
  *
  * @name Home Page
  * @route {GET} /
  */
 router.get('/', async ctx => {
+	const items = await new Items(dbName)
+	const allitems = items.getItems()
+	ctx.hbs.items = allitems
 	try {
 		await ctx.render('index', ctx.hbs)
-	} catch(err) {
+	} catch (err) {
 		await ctx.render('error', ctx.hbs)
 	}
 })
@@ -43,7 +47,7 @@ router.post('/register', async ctx => {
 		// call the functions in the module
 		await account.register(ctx.request.body.user, ctx.request.body.pass, ctx.request.body.email)
 		ctx.redirect(`/login?msg=new user "${ctx.request.body.user}" added, you need to log in`)
-	} catch(err) {
+	} catch (err) {
 		ctx.hbs.msg = err.message
 		ctx.hbs.body = ctx.request.body
 		console.log(ctx.hbs)
@@ -66,8 +70,8 @@ router.post('/login', async ctx => {
 		await account.login(body.user, body.pass)
 		ctx.session.authorised = true
 		const referrer = body.referrer || '/secure'
-		return ctx.redirect(`${referrer}?msg=you are now logged in...`)
-	} catch(err) {
+		return ctx.redirect(`${referrer}?msg=you are now logged in`)
+	} catch (err) {
 		ctx.hbs.msg = err.message
 		await ctx.render('login', ctx.hbs)
 	} finally {

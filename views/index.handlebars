@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 
 <head>
@@ -27,10 +26,12 @@
 	{{/if}}
 	<main>
 		<p>This is the home page. Users can see it without logging in.</p>
-
 		{{#if authorised}}
 		<p><a href="/secure">secure page</a></p>
 		{{/if}}
+		{{#each items}}
+		<p>{{this.id}}</p>
+		{{/each}}
 	</main>
 </body>
 

@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 	console.log('DOMContentLoaded')
-	// remove popup after 2 seconds
+	// remove aside after 2 seconds
 	const delay = 2000
 	document.querySelector('aside').hidden = false
 	console.log('aside unhidden')
@@ -9,3 +9,4 @@ window.addEventListener('DOMContentLoaded', () => {
 		console.log('aside hidden')
 	}, delay)
 })
+

@@ -17,7 +17,9 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
-	await items.addItem('mona lisa', 'http://unsplash.it/500/500', 500, 'for sale', 2)
+	const price = 500
+	const userID = 2
+	await items.addItem('mona lisa', 'http://unsplash.it/500/500', price, 'for sale', userID)
 	const allitems = await items.getItems()
 	// console.log(allitems)
 	// ctx.hbs.body = allitems

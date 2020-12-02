@@ -43,6 +43,33 @@ if [ "$branch" = "master" ]; then
 	exit 1 # commit will not execute
 fi
 
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$")
+ESLINT="$(git rev-parse --show-toplevel)/node_modules/.bin/eslint"
+if [[ "$STAGED_FILES" = "" ]]; then
+  exit 0
+fi
+
+PASS=true
+
+for FILE in $STAGED_FILES
+do
+"$ESLINT" "$FILE"
+
+if [[ "$?" == 0 ]]; then
+	printf "Passed $FILE"
+else
+	printf "Failed: $FILE"
+	PASS=false
+fi
+done
+
+if ! = $PASS; then
+	printf "COMMIT FAILED: Your commit contains files that should pass ESLint but don't. Please fix."
+	exit 1
+else
+	printf "COMMIT PASSED"
+fi
+
 # is the current branch a direct child of the master branch?
 # echo "checking parent branch"
 # PARENT=$(git show-branch -a | grep -v `git rev-parse --abbrev-ref HEAD` | grep -v origin | sed 's/.*\[\(.*\)\].*/\1/' | grep -v -e '^$' | grep -v "^----$"

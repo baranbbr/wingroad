@@ -20,7 +20,7 @@ class Items {
 		})()
 	}
 	async getItems() {
-		const sql = `SELECT * FROM items;`
+		const sql = 'SELECT * FROM items;'
 		const items = await this.db.get(sql)
 		return items
 	}

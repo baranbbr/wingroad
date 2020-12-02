@@ -31,6 +31,10 @@ class Items {
 		// console.log(items)
 		return items
 	}
+	async addDemoItem() {
+		const sql = 'INSERT INTO items(name, thumbnail, price, status, userID) VALUES("mona lisa", "https://unsplash.it/500", 500, "for sale", 1)'
+		await this.db.run(sql)
+	}
 	/**
 	 * adds a new item
 	 * @param {String} name the name of the item being added

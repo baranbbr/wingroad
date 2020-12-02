@@ -17,9 +17,13 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
-	const allitems = items.getItems()
+	await items.addItem('mona lisa', 'http://unsplash.it/500/500', 500, 'for sale', 2)
+	const allitems = await items.getItems()
+	// console.log(allitems)
+	// ctx.hbs.body = allitems
 	ctx.hbs.items = allitems
 	try {
+		console.log(ctx.hbs)
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {
 		await ctx.render('error', ctx.hbs)
@@ -67,6 +71,7 @@ router.post('/login', async ctx => {
 	ctx.hbs.body = ctx.request.body
 	try {
 		const body = ctx.request.body
+		console.log(body)
 		await account.login(body.user, body.pass)
 		ctx.session.authorised = true
 		const referrer = body.referrer || '/secure'

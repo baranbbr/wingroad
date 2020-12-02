@@ -5,14 +5,12 @@ test('GET ITEMS : test if items are retrieved from database', async test => {
 	test.plan(1)
 	const item = await new Items()
 	try {
-		const sql = 'INSERT INTO items(name, thumbnail, price, status)\
-		VALUES("item", "http://unsplash.it/500/500", 500, "for sale", 4);'
-		await this.db.run(sql)
-		const items = item.getItems()
-		const itemsLength = items.length
-		test.is(itemsLength, 1, 'unable to retrieve items')
+		await item.addItem('mona lisa', 'http://unsplash.it/500/500', 500, 'for sale', 2)
+		const allItems = await item.getItems()
+		const itemsLength = Object.keys(allItems).length
+		test.is(itemsLength, 6, 'unable to retrieve items')
 	} catch(err) {
-		test.fail('error thrown')
+		test.fail(`error thrown ${err}`)
 	} finally {
 		await item.close()
 	}

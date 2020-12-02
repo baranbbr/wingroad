@@ -1,8 +1,11 @@
 /** @module Items */
 
-// import bcrypt from 'bcrypt-promise'
 import sqlite from 'sqlite-async'
 
+/**
+ * Items
+ * ES6 module that handles adding and retrieving items that users want to sell.
+ */
 class Items {
 	/**
    * Create a home object
@@ -19,10 +22,32 @@ class Items {
 			return this
 		})()
 	}
+	/**
+	 * retrieves items from database
+	 */
 	async getItems() {
-		const sql = 'SELECT * FROM items;'
+		const sql = 'SELECT * FROM items'
 		const items = await this.db.get(sql)
+		// console.log(items)
 		return items
+	}
+	/**
+	 * adds a new item
+	 * @param {String} name the name of the item being added
+	 * @param {String} thumbnail an image of the item being added
+	 * @param {Integer} price the price of the item being added
+	 * @param {String} status the status (for sale, under offer or sold) of the item
+	 * @param {Integer} userID the user adding the item for sale
+	 */
+	async addItem(name, thumbnail, price, status, userID) {
+		Array.from(arguments).forEach( val => {
+			if(val.length === 0) throw new Error('missing field')
+		})
+		const sql = `INSERT INTO items(name, thumbnail, price, status, userID)\
+		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
+		console.log(sql)
+		await this.db.run(sql)
+		return true
 	}
 
 	async close() {

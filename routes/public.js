@@ -21,9 +21,8 @@ router.get('/', async ctx => {
 	const userID = 2
 	await items.addItem('mona lisa', 'http://unsplash.it/500/500', price, 'for sale', userID)
 	const allitems = await items.getItems()
-	// console.log(allitems)
-	// ctx.hbs.body = allitems
 	ctx.hbs.items = allitems
+
 	try {
 		console.log(ctx.hbs)
 		await ctx.render('index', ctx.hbs)

@@ -27,8 +27,7 @@ class Items {
 	 */
 	async getItems() {
 		const sql = 'SELECT * FROM items'
-		const items = await this.db.get(sql)
-		// console.log(items)
+		const items = await this.db.all(sql)
 		return items
 	}
 	async addDemoItem() {

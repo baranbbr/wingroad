@@ -29,10 +29,10 @@
 		{{#if authorised}}
 		<p><a href="/secure">secure page</a></p>
 		{{/if}}
-		{{#with items}}
+		{{#each items}}
 		<p>{{name}}</p>
 		<img src="{{thumbnail}}" alt="">
-		{{/with}}
+		{{/each}}
 	</main>
 </body>
 

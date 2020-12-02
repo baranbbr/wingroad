@@ -68,6 +68,7 @@ if ! = $PASS; then
 	exit 1
 else
 	printf "COMMIT PASSED"
+	exit 0
 fi
 
 # is the current branch a direct child of the master branch?

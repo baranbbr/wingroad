@@ -17,8 +17,9 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
-	const price = 500
+	const price = 500 // linter complains of magic numbers
 	const userID = 2
+	// add demo record
 	await items.addItem('mona lisa', 'http://unsplash.it/500/500', price, 'for sale', userID)
 	const allitems = await items.getItems()
 	ctx.hbs.items = allitems

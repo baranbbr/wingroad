@@ -26,8 +26,11 @@ class Items {
 	 * retrieves items from database
 	 */
 	async getItems() {
-		const sql = 'SELECT * FROM items'
+		// need to sort by post date
+		// need to display who posted item
+		const sql = 'SELECT items.*, users.user FROM items, users WHERE users.id=items.userID'
 		const items = await this.db.all(sql)
+		console.log(items)
 		return items
 	}
 	async addDemoItem() {

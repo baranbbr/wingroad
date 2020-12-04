@@ -17,7 +17,7 @@ class Items {
 			// we need this table to store the items of users
 			const sql = 'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
-					 userID INTEGER, FOREIGN KEY (userID) REFERENCES users(id));'
+					 userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (userID) REFERENCES users(id));'
 			await this.db.run(sql)
 			return this
 		})()

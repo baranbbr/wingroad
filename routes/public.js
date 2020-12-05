@@ -51,8 +51,9 @@ router.post('/register', async ctx => {
 	const account = await new Accounts(dbName)
 	try {
 		// call the functions in the module
-		await account.register(ctx.request.body.fname, ctx.request.body.lname,
-			ctx.request.body.user, ctx.request.body.pass, ctx.request.body.email, ctx.request.body.phone)
+		console.log(ctx.request.body.user)
+		await account.register(ctx.request.body.user, ctx.request.body.pass,
+			ctx.request.body.email, ctx.request.body.phone)
 		ctx.redirect(`/login?msg=new user "${ctx.request.body.user}" added, you need to log in`)
 	} catch (err) {
 		ctx.hbs.msg = err.message

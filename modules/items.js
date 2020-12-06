@@ -20,7 +20,8 @@ class Items {
 			// we need this table to store the items of users
 			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
-					 userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (userID) REFERENCES users(id));'
+				userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
+				FOREIGN KEY (userID) REFERENCES users(id));'
 			await this.db.run(sqlItems)
 			return this
 		})()
@@ -31,10 +32,7 @@ class Items {
 	async getItems() {
 		// const sql = 'SELECT items.*, users.user FROM items, users ORDER BY uploadtime'
 		const sql = 'SELECT * FROM items'
-		const sqll = 'SELECT * FROM users'
-
 		const items = await this.db.all(sql)
-		const users = await this.db.all(sqll)
 
 		// console.log('items items.js')
 		// console.log(items)

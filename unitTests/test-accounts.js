@@ -6,8 +6,8 @@ test('REGISTER : register and log in with a valid account', async test => {
 	test.plan(1)
 	const account = await new Accounts() // no database specified so runs in-memory
 	try {
-		await account.register('doej', 'password', 'doej@gmail.com')
-	  const login = await account.login('doej', 'password')
+		await account.register('doej', 'password', 'doej@gmail.com', '014123122')
+		const login = await account.login('doej', 'password')
 		test.is(login, true, 'unable to log in')
 	} catch(err) {
 		test.fail('error thrown')

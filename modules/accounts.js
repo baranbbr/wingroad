@@ -19,8 +19,8 @@ class Accounts {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users\
-				(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT);'
+			const sql = 'CREATE TABLE IF NOT EXISTS \
+			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
 			await this.db.run(sql)
 			return this
 		})()
@@ -31,9 +31,10 @@ class Accounts {
 	 * @param {String} user the chosen username
 	 * @param {String} pass the chosen password
 	 * @param {String} email the chosen email
+	 * @param {Integer} phone phone number of user
 	 * @returns {Boolean} returns true if the new user has been added
 	 */
-	async register(user, pass, email) {
+	async register(user, pass, email, phone) {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
 		})
@@ -44,7 +45,8 @@ class Accounts {
 		const emails = await this.db.get(sql)
 		if(emails.records !== 0) throw new Error(`email address "${email}" is already in use`)
 		pass = await bcrypt.hash(pass, saltRounds)
-		sql = `INSERT INTO users(user, pass, email) VALUES("${user}", "${pass}", "${email}")`
+		sql = `INSERT INTO users(user, pass, email, phone)\
+		VALUES("${user}", "${pass}", "${email}", "${phone}")`
 		await this.db.run(sql)
 		return true
 	}

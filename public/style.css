@@ -142,9 +142,9 @@ legend {
 	padding: 0.6vw;
 }
 
-input[type="file"] {
+/* input[type="file"] {
 	display: none;
-}
+} */
 
 input[type="submit"], header > a, .custom-file-upload {
   background-color: grey;
@@ -163,7 +163,7 @@ input[type="submit"]:hover, header > a:hover, .custom-file-upload:hover {
   background-color: white;
 }
 
-input[type="text"], input[type="email"], input[type="password"], textarea, select {
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea, select {
 	font-size: 1.5vw;
 	width: 25vw;
 	border: 1px solid #CCC;
@@ -180,6 +180,7 @@ textarea {
 select {
 	width: 26.3vw;
 	-webkit-appearance: none;
+	border-radius: 0;
 	-webkit-border-radius: 0px;
 }
 

@@ -14,24 +14,30 @@ class Items {
 	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
-			// we need this table to store the items of users
-			const sql = 'CREATE TABLE IF NOT EXISTS items\
-				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
-					 userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
-					  FOREIGN KEY (userID) REFERENCES users(id));'
+			const sql = 'CREATE TABLE IF NOT EXISTS \
+			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
 			await this.db.run(sql)
+			// we need this table to store the items of users
+			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
+				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
+					 userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (userID) REFERENCES users(id));'
+			await this.db.run(sqlItems)
 			return this
 		})()
 	}
 	/**
-	 * retrieves items from database
+	 * retrieves all items from table items as well as which user added item
 	 */
 	async getItems() {
-		// need to sort by post date
-		// need to display who posted item
-		const sql = 'SELECT items.*, users.user FROM items, users WHERE users.id=items.userID ORDER BY uploadtime'
+		// const sql = 'SELECT items.*, users.user FROM items, users ORDER BY uploadtime'
+		const sql = 'SELECT * FROM items'
+		const sqll = 'SELECT * FROM users'
+
 		const items = await this.db.all(sql)
-		console.log(items)
+		const users = await this.db.all(sqll)
+
+		// console.log('items items.js')
+		// console.log(items)
 		return items
 	}
 	async addDemoItem() {
@@ -51,7 +57,7 @@ class Items {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
 		})
-		const sql = `INSERT INTO items(name, thumbnail, price, status, userID)\
+		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
 		console.log(sql)
 		await this.db.run(sql)

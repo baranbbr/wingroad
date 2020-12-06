@@ -17,15 +17,15 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
-	const price = 500 // linter complains of magic numbers
-	const userID = 2
-	// add demo record
-	await items.addItem('mona lisa', 'http://unsplash.it/500/500', price, 'for sale', userID)
+	items.addDemoItem()
 	const allitems = await items.getItems()
+	// allitems ? ctx.hbs.items = allitems : ctx.hbs.items = undefined
 	ctx.hbs.items = allitems
+	console.log(allitems)
+	console.log('ctx items is')
+	console.log(ctx.hbs.items)
 
 	try {
-		console.log(ctx.hbs)
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {
 		await ctx.render('error', ctx.hbs)

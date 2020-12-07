@@ -28,3 +28,17 @@ const body = document.querySelector('body')
 theme.addEventListener('click', () => {
 	body.classList.toggle('dark')
 })
+
+// window.onscroll = function() {myFunction()};
+
+// var navbar = document.getElementById("nav");
+// var sticky = navbar.offsetTop;
+
+// function myFunction() {
+// 	console.log('hi')
+//   	if (window.pageYOffset >= sticky) {
+//     	navbar.classList.add("sticky")
+//   	} else {
+//     	navbar.classList.remove("sticky");
+//   	}
+// }

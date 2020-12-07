@@ -11,10 +11,10 @@
 </head>
 
 <body>
-	<header id="nav">
+	<header id="nav" class="sticky">
 		<div class="nav-heading">
 			<h1>
-				<a href="#">Alton Station Café</a>
+				<a href="#">Wingroad</a>
 			</h1>
 			<div class="nav-buttons">
 				<button type="button" id="navBtn">
@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="hidden" id="navLinks">
-			<a href="#" class="">Home</a>
+			<a href="/" class="">Home</a>
 			{{#if authorised}}
 			<a href="/logout">Log out</a>
 			{{else}}
@@ -44,7 +44,7 @@
 	</aside>
 	{{/if}}
 	<main>
-		<p>This is the home page. Users can see it without logging in.</p>
+		<p>This is the home page.</p>
 		{{#if authorised}}
 		<p><a href="/secure">secure page</a></p>
 		{{/if}}

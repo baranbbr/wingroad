@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-	console.log('DOMContentLoaded')
 	// remove aside after 2 seconds
 	const delay = 2000
 	document.querySelector('aside').hidden = false
@@ -25,9 +24,19 @@ navBtn.addEventListener('click', () => {
 
 const theme = document.getElementById('theme')
 const body = document.querySelector('body')
+
+function isDarkModeEnabled() {
+	const enabled = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	console.log(enabled)
+	return enabled
+}
+
+if(isDarkModeEnabled()) body.classList.add('dark')
+
 theme.addEventListener('click', () => {
 	body.classList.toggle('dark')
 })
+
 
 // window.onscroll = function() {myFunction()};
 
@@ -42,3 +51,5 @@ theme.addEventListener('click', () => {
 //     	navbar.classList.remove("sticky");
 //   	}
 // }
+
+

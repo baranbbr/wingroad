@@ -1,7 +1,6 @@
-main {
-	margin: 0 auto;
-	max-width: 1280px;
-	padding: 0 10px;
+:root {
+	--light-card: #9595ff;
+	--dark-card: #6969db;
 }
 
 .card-container {
@@ -11,7 +10,7 @@ main {
 }
 
 .card {
-	background-color: #6969db;
+	background-color: var(--light-card);
 	padding: 1rem;
 	max-width: 100%;
 	margin: 1rem;
@@ -52,7 +51,7 @@ main {
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
 	.card {
 		max-width: 30%;
 	}

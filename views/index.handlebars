@@ -11,15 +11,7 @@
 </head>
 
 <body>
-	<header>
-		<h1>Home</h1>
-		{{#if authorised}}
-		<a href="/logout">Log out</a>
-		{{else}}
-		<a href="/login">Log in</a>
-		{{/if}}
-	</header>
-	<header class="top-0 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3" id="nav">
+	<header id="nav">
 		<div class="nav-heading">
 			<h1>
 				<a href="#">Alton Station Café</a>
@@ -36,16 +28,14 @@
 		</div>
 
 		<div class="hidden" id="navLinks">
-			<div class="links-container">
-				<a href="#" class="">About</a>
-				<a href="#"
-					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Menu</a>
-				<a href="#"
-					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Gallery</a>
-				<a href="#"
-					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Contact
-					Us</a>
-			</div>
+			<a href="#" class="">Home</a>
+			{{#if authorised}}
+			<a href="/logout">Log out</a>
+			{{else}}
+			<a href="/login">Log in</a>
+			<a href="/register">Register</a>
+			{{/if}}
+			<button id="theme">Toggle Theme</button>
 		</div>
 	</header>
 	{{#if msg}}

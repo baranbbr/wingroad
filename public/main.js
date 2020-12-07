@@ -22,3 +22,9 @@ navBtn.addEventListener('click', () => {
 	btnX.classList.toggle('hidden')
 	btnBurger.classList.toggle('hidden')
 })
+
+const theme = document.getElementById('theme')
+const body = document.querySelector('body')
+theme.addEventListener('click', () => {
+	body.classList.toggle('dark')
+})

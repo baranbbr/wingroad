@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Muli', sans-serif;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* formats the red message boxes */
+aside {
+	max-width: 400px;
+	margin: auto;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+}
+.msg {
+/* 	position: fixed;
+	top: 2em; */
+	border: 1px solid red;
+	font-weight: bold;
+	background-color: white;
+	color: red;
+	padding: 1em;
+	margin: 2em;
+}

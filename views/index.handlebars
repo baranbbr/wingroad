@@ -6,8 +6,8 @@
 	<title>Home Page</title>
 	<meta name="description" content="Artists, designers and photographers can sell their pieces.">
 	<meta name="author" content="Baran Babur">
-	<link href="{{host}}/style.css" type="text/css" rel="stylesheet" />
-	<script type="module" src="main.js"></script>
+	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
+	<link href="{{host}}/styles/index.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
@@ -19,6 +19,35 @@
 		<a href="/login">Log in</a>
 		{{/if}}
 	</header>
+	<header class="top-0 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3" id="nav">
+		<div class="nav-heading">
+			<h1>
+				<a href="#">Alton Station Café</a>
+			</h1>
+			<div class="nav-buttons">
+				<button type="button" id="navBtn">
+					<svg class="h-6 w-6 fill-current" width="24" height="24" viewBox="0 0 24 24">
+						<path id="navBurger" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+						<path id="navClose" class="hidden"
+							d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="hidden" id="navLinks">
+			<div class="links-container">
+				<a href="#" class="">About</a>
+				<a href="#"
+					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Menu</a>
+				<a href="#"
+					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Gallery</a>
+				<a href="#"
+					class="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-yellow-700 sm:mt-0 sm:ml-5">Contact
+					Us</a>
+			</div>
+		</div>
+	</header>
 	{{#if msg}}
 	<aside>
 		<p class="msg">{{msg}}</p>
@@ -29,16 +58,20 @@
 		{{#if authorised}}
 		<p><a href="/secure">secure page</a></p>
 		{{/if}}
-		{{#each items}}
-		<p>{{name}}</p>
-		<p>{{price}}</p>
-		<p>{{status}}</p>
-		<p>{{userID}}</p>
-		<p>{{user}}</p>
-
-		<img src="{{thumbnail}}" alt="">
-		{{/each}}
+		<section class="card-container">
+			{{#each items}}
+			<article class="card">
+				<img src="{{thumbnail}}" alt="">
+				<h1 class="card-heading">{{name}}</h1>
+				<p>{{price}}</p>
+				<p>{{status}}</p>
+				<p>{{userID}}</p>
+				<p>{{user}}</p>
+			</article>
+			{{/each}}
+		</section>
 	</main>
+	<script type="module" src="main.js"></script>
 </body>
 
 </html>

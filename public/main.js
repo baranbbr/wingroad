@@ -10,3 +10,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	}, delay)
 })
 
+// Open and Close Navigation Links
+const links = document.getElementById("navLinks")
+const navBtn = document.getElementById("navBtn")
+
+const btnX = document.getElementById("navClose")
+const btnBurger = document.getElementById("navBurger")
+
+navBtn.addEventListener('click', () => {
+	links.classList.toggle('hidden')
+	btnX.classList.toggle('hidden')
+	btnBurger.classList.toggle('hidden')
+})

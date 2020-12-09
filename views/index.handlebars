@@ -6,18 +6,37 @@
 	<title>Home Page</title>
 	<meta name="description" content="Artists, designers and photographers can sell their pieces.">
 	<meta name="author" content="Baran Babur">
-	<link href="{{host}}/style.css" type="text/css" rel="stylesheet" />
-	<script type="module" src="main.js"></script>
+	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
+	<link href="{{host}}/styles/index.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-	<header>
-		<h1>Home</h1>
-		{{#if authorised}}
-		<a href="/logout">Log out</a>
-		{{else}}
-		<a href="/login">Log in</a>
-		{{/if}}
+	<header id="nav" class="sticky">
+		<div class="nav-heading">
+			<h1>
+				<a href="#">Wingroad</a>
+			</h1>
+			<div class="nav-buttons">
+				<button type="button" id="navBtn">
+					<svg class="h-6 w-6 fill-current" width="24" height="24" viewBox="0 0 24 24">
+						<path id="navBurger" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+						<path id="navClose" class="hidden"
+							d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="hidden" id="navLinks">
+			<a href="/" class="">Home</a>
+			{{#if authorised}}
+			<a href="/logout">Log out</a>
+			{{else}}
+			<a href="/login">Log in</a>
+			<a href="/register">Register</a>
+			{{/if}}
+			<button id="theme">Toggle Theme</button>
+		</div>
 	</header>
 	{{#if msg}}
 	<aside>
@@ -25,20 +44,24 @@
 	</aside>
 	{{/if}}
 	<main>
-		<p>This is the home page. Users can see it without logging in.</p>
+		<p>This is the home page.</p>
 		{{#if authorised}}
 		<p><a href="/secure">secure page</a></p>
 		{{/if}}
-		{{#each items}}
-		<p>{{name}}</p>
-		<p>{{price}}</p>
-		<p>{{status}}</p>
-		<p>{{userID}}</p>
-		<p>{{user}}</p>
-
-		<img src="{{thumbnail}}" alt="">
-		{{/each}}
+		<section class="card-container">
+			{{#each items}}
+			<article class="card">
+				<img src="{{thumbnail}}" alt="">
+				<h1 class="card-heading">{{name}}</h1>
+				<p>{{price}}</p>
+				<p>{{status}}</p>
+				<p>{{userID}}</p>
+				<p>{{user}}</p>
+			</article>
+			{{/each}}
+		</section>
 	</main>
+	<script type="module" src="main.js"></script>
 </body>
 
 </html>

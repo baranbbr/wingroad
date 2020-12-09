@@ -6,14 +6,37 @@
 	<title>Log In</title>
 	<meta name="description" content="form to add new books">
 	<meta name="author" content="Mark Tyers">
-	<link href="{{host}}/style.css" type="text/css" rel="stylesheet" />
+	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
 	<script type="module" src="main.js"></script>
 </head>
 
 <body>
-	<header>
-		<h1>Log In</h1>
-		<a href="/register">Register</a>
+	<header id="nav">
+		<div class="nav-heading">
+			<h1>
+				<a href="#">Wingroad</a>
+			</h1>
+			<div class="nav-buttons">
+				<button type="button" id="navBtn">
+					<svg class="h-6 w-6 fill-current" width="24" height="24" viewBox="0 0 24 24">
+						<path id="navBurger" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+						<path id="navClose" class="hidden"
+							d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="hidden" id="navLinks">
+			<a href="/" class="">Home</a>
+			{{#if authorised}}
+			<a href="/logout">Log out</a>
+			{{else}}
+			<a href="/login">Log in</a>
+			<a href="/register">Register</a>
+			{{/if}}
+			<button id="theme">Toggle Theme</button>
+		</div>
 	</header>
 	{{#if msg}}
 	<aside>
@@ -33,7 +56,6 @@
 			<input type="hidden" name="referrer" value="{{referrer}}">
 			<p><input type="submit" value="Log in"></p>
 		</form>
-		<p><a href="/">Home page</a></p>
 	</main>
 </body>
 

@@ -33,3 +33,16 @@ test('ADD ITEMS : test if items can be added to database', async test => {
 		await item.close()
 	}
 })
+
+test('ADD ITEMS : test if items can be added to database with missing input', async test => {
+	test.plan(1)
+	const item = await new Items()
+	try {
+		const add = await item.addItem('', 'http://unsplash.it/500/500', '500', 'for sale', 1)
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message, 'missing field', 'incorrect error message')
+	} finally {
+		await item.close()
+	}
+})

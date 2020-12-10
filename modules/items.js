@@ -54,6 +54,7 @@ class Items {
 	async addItem(name, thumbnail, price, status, userID) {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
+			return false
 		})
 		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`

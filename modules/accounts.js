@@ -18,6 +18,11 @@ class Accounts {
 	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
+			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
+				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
+				userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
+				FOREIGN KEY (userID) REFERENCES users(id));'
+			await this.db.run(sqlItems)
 			// we need this table to store the user accounts
 			const sql = 'CREATE TABLE IF NOT EXISTS \
 			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'

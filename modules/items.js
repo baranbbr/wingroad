@@ -57,7 +57,6 @@ class Items {
 		})
 		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
-		console.log(sql)
 		await this.db.run(sql)
 		return true
 	}

@@ -2,7 +2,7 @@ import test from 'ava'
 import Items from '../modules/items.js'
 import Accounts from '../modules/accounts.js'
 
-test('GET ITEMS : test if items are retrieved from database', async test => {
+test('GET ITEMS : test if items retrieved from database', async test => {
 	test.plan(1)
 	const item = await new Items()
 	const account = await new Accounts()
@@ -21,7 +21,7 @@ test('GET ITEMS : test if items are retrieved from database', async test => {
 	}
 })
 
-test('ADD ITEMS : test if items can be added to database', async test => {
+test('ADD ITEMS : items can be added to database', async test => {
 	test.plan(1)
 	const item = await new Items()
 	try {
@@ -34,7 +34,7 @@ test('ADD ITEMS : test if items can be added to database', async test => {
 	}
 })
 
-test('ADD ITEMS : test if items can be added to database with missing input', async test => {
+test('ADD ITEMS : items cannot be added to database with missing input', async test => {
 	test.plan(1)
 	const item = await new Items()
 	try {

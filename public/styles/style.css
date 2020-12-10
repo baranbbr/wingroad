@@ -106,7 +106,6 @@ main {
 	position: sticky;
 	top: 0;
 	width: 100%;
-	/* background-color: #6969db; */
 }
 
 #nav i {
@@ -145,7 +144,7 @@ aside {
 	top: 10vh;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 2;
+	z-index: 4;
 }
 .msg {
 	border: 1px solid red;

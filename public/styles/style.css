@@ -21,6 +21,10 @@ body {
 	color: var(--dark);
 }
 
+.hidden {
+	display: none !important;
+}
+
 body.dark {
 	background-color: var(--dark);
 	color: var(--light);
@@ -42,6 +46,10 @@ body.dark button {
 	color: var(--dark-link)
 }
 
+body.dark #nav {
+	background-color: var(--dark);
+}
+
 main {
 	margin: 0 auto;
 	width: 90vw;
@@ -52,11 +60,13 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 2rem;
+	padding: 0 3vw;
+	margin: 0;
 }
 
 #nav {
 	z-index: 3;
+	background-color: var(--light);
 }
 
 #navLinks {
@@ -99,12 +109,17 @@ main {
 	/* background-color: #6969db; */
 }
 
+#nav i {
+	font-size: 1.4rem;
+}
+
 @media (min-width: 640px) {
 	#nav {	
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding: 0 1rem;
+		/* height: auto; */
 	}
 	.nav-heading {
 		padding: 0;
@@ -113,13 +128,12 @@ main {
 		display: none;
 	}
 	#navLinks {
-		display: flex;
+		display: flex !important;
 		justify-content: space-around;
 	}
-}
-
-.hidden {
-	display: none;
+	.nav-heading {
+		padding: 1rem 2rem;
+	}
 }
 
 
@@ -149,17 +163,28 @@ input[type='submit'] {
 	border-radius: 0.3rem;
 	font-size: 1rem;
 	cursor: pointer;
-	box-shadow: 0 5px 5px rgba(100, 100, 100, 0.7);
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* input[type='submit']: {} */
+input[type='submit']:hover {
+	background-color: var(--light-link);
+	transform: scale(1.1);
+	transition: all 0.3s ease-in-out;
+}
 
 
 input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea, select {
 	font-size: 1rem;
-	width: 30vw;
+	max-width: 100%;
+	width: 100%;
 	border: 1px solid #cccccc;
 	padding: 1rem;
+}
+
+@media (min-width: 640px) {
+	input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea, select {
+		width: 30vw;	
+	}
 }
 
 input:focus {
@@ -167,6 +192,7 @@ input:focus {
 }
 
 main form {
+	/* height: 60vh; */
 	display: flex;
 	align-items: center;
 	justify-content: center;

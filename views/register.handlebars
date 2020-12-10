@@ -5,8 +5,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Create an Account</title>
-	<meta name="description" content="form to add new books">
-	<meta name="author" content="Mark Tyers">
+	<meta name="description" content="Register for Wingroad here using your email address.">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<meta name="author" content="Baran Babur">
 	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
 	<script type="module" src="main.js"></script>
 </head>
@@ -15,15 +16,12 @@
 	<header id="nav">
 		<div class="nav-heading">
 			<h1>
-				<a href="#">Wingroad</a>
+				<a href="/">Wingroad</a>
 			</h1>
 			<div class="nav-buttons">
 				<button type="button" id="navBtn">
-					<svg class="h-6 w-6 fill-current" width="24" height="24" viewBox="0 0 24 24">
-						<path id="navBurger" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
-						<path id="navClose" class="hidden"
-							d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-					</svg>
+					<i class="fas fa-bars" id="navBurger"></i>
+					<i class="fas fa-times hidden" id="navClose"></i>
 				</button>
 			</div>
 		</div>
@@ -66,6 +64,8 @@
 			<p><input type="submit" value="Create"></p>
 		</form>
 	</main>
+	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
+	<script type="module" src="main.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+	console.log('DOMContentLoaded')
 	// remove aside after 2 seconds
 	const delay = 2000
 	document.querySelector('aside').hidden = false
@@ -13,12 +14,13 @@ window.addEventListener('DOMContentLoaded', () => {
 const links = document.getElementById('navLinks')
 const navBtn = document.getElementById('navBtn')
 
-const btnX = document.getElementById('navClose')
+const btnClose = document.getElementById('navClose')
 const btnBurger = document.getElementById('navBurger')
+btnClose.classList.add('hidden')
 
 navBtn.addEventListener('click', () => {
 	links.classList.toggle('hidden')
-	btnX.classList.toggle('hidden')
+	btnClose.classList.toggle('hidden')
 	btnBurger.classList.toggle('hidden')
 })
 

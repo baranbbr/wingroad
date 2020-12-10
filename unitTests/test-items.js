@@ -38,7 +38,7 @@ test('ADD ITEMS : test if items can be added to database with missing input', as
 	test.plan(1)
 	const item = await new Items()
 	try {
-		const add = await item.addItem('', 'http://unsplash.it/500/500', '500', 'for sale', 1)
+		await item.addItem('', 'http://unsplash.it/500/500', '500', 'for sale', 1)
 		test.fail('error not thrown')
 	} catch(err) {
 		test.is(err.message, 'missing field', 'incorrect error message')

@@ -13,9 +13,29 @@
 </head>
 
 <body>
-	<header>
-		<h1>Secure Page</h1>
-		<a href="/logout">Log out</a>
+	<header id="nav">
+		<div class="nav-heading">
+			<h1>
+				<a href="/">Wingroad</a>
+			</h1>
+			<div class="nav-buttons">
+				<button type="button" id="navBtn">
+					<i class="fas fa-bars" id="navBurger"></i>
+					<i class="fas fa-times hidden" id="navClose"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="hidden" id="navLinks">
+			<a href="/" class="">Home</a>
+			{{#if authorised}}
+			<a href="/logout">Log out</a>
+			{{else}}
+			<a href="/login">Log in</a>
+			<a href="/register">Register</a>
+			{{/if}}
+			<button id="theme">Toggle Theme</button>
+		</div>
 	</header>
 	{{#if msg}}
 	<aside>
@@ -26,6 +46,8 @@
 		<p>This is a secure page. Users need to have a valid account and be logged in to see it.</p>
 		<p><a href="/">Home page</a></p>
 	</main>
+	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
+	<script type="module" src="main.js"></script>
 </body>
 
 </html>

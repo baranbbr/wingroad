@@ -1,7 +1,7 @@
 
 import Router from 'koa-router'
 
-const router = new Router({ prefix: '/secure' })
+const router = new Router({ prefix: '/sell' })
 
 async function checkAuth(ctx, next) {
 	console.log('secure router middleware')

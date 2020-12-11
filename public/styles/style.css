@@ -34,6 +34,10 @@ body.dark .card {
 	background-color: var(--dark-card);
 }
 
+body.dark .msg {
+		background-color: var(--dark-card);
+}
+
 body.dark a {
 	color: var(--dark-link);
 }
@@ -138,22 +142,43 @@ main {
 
 /* formats the red message boxes */
 aside {
-	max-width: 25vw;
+	max-width: 30vw;
 	margin: auto;
 	position: absolute;
 	top: 10vh;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 4;
+	position: fixed;
 }
+
 .msg {
-	border: 1px solid red;
+	border: 2px solid #fff;
 	border-radius: 0.7rem;
 	font-weight: bold;
-	background-color: #f9f9f9;
-	color: #ff4e4e;
+	background-color: var(--dark-card);
+	color: #ffffff;
 	padding: 1rem 2em;
+	animation: pulse 0.5s infinite;
 }
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+	}
+	
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+	}
+	
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+	}
+}
+
 
 input[type='submit'] {
 	border: 0;
@@ -190,6 +215,54 @@ input:focus {
 	outline: #aaaaaa solid 1px;
 }
 
+/* 	Styles for a select element surrounded by a div with class .select 
+*	used on sell.handlebars 
+*/
+
+select {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	padding: 0 1em 0 0;
+	margin: 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: inherit;
+	line-height: inherit;
+	outline: none;
+}
+
+.select {
+	min-width: 15ch;
+	max-width: 30ch;
+	border: 0;
+	border-radius: 0.25rem;
+	padding: 0.25rem 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+	line-height: 1.1;
+	background-color: #ffffff;
+	background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+	display: grid;
+	grid-template-areas: "select";
+	align-items: center;
+}
+
+select, .select::after {
+	grid-area: select;
+}
+
+.select::after {
+	content: "";
+	z-index: 5;
+	width: 0.8em;
+	height: 0.5em;
+	background-color: #777777;
+	clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+	justify-self: end;
+  }
+
 main form {
 	display: flex;
 	align-items: center;
@@ -199,29 +272,33 @@ main form {
 
 main .card form {
 	display: block;
+	padding-bottom: 1rem;
+}
+
+main .btn-container {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+main button {
+	border: 0;
+	padding: 1rem 1.2rem;
+	margin-top: 1rem;
+	cursor: pointer;
+	border-radius: 0.3rem;
+	font-size: 1rem;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 main button.update {
-	border: 0;
 	background-color: var(--light-link);
 	color: var(--light);
-	padding: 1rem 1.2rem;
 	margin-right: 0.7rem;
-	border-radius: 0.3rem;
-	font-size: 1rem;
-	cursor: pointer;
-	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 main button.delete {
-	border: 0;
-	background-color: #d6666d;
+	background-color: #d46169;
 	color: var(--light);
-	padding: 1rem 1.2rem;
-	border-radius: 0.3rem;
-	font-size: 1rem;
-	cursor: pointer;
-	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 main button:hover {

@@ -55,17 +55,21 @@
 				<p>{{status}}</p>
 				<p>itemID {{itemID}}</p>
 				<form action="/sell/update/{{itemID}}" method="post">
-					<select name="status" id="statuses">
-						<option value="for sale">For Sale</option>
-						<option value="under offer">Under Offer</option>
-						<option value="sold">Sold</option>
-					</select>
-					<button class="update" type="submit">
-						Update
-					</button>
-					<button class="delete" formaction="/sell/del/{{itemID}}">
-						Delete
-					</button>
+					<div class="select">
+						<select name="status" class="select-status">
+							<option value="for sale">For Sale</option>
+							<option value="under offer">Under Offer</option>
+							<option value="sold">Sold</option>
+						</select>
+					</div>
+					<div class="btn-container">
+						<button class="update" type="submit">
+							Update
+						</button>
+						<button class="delete" formaction="/sell/del/{{itemID}}">
+							Delete
+						</button>
+					</div>
 				</form>
 			</article>
 			{{/each}}

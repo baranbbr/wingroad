@@ -70,6 +70,7 @@ class Items {
 
 	async delete(id) {
 		const sql = `DELETE * FROM items WHERE id=${id};`
+		await this.db.run(sql)
 		return true
 	}
 

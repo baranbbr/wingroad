@@ -40,8 +40,6 @@ class Items {
 	async getUserItems(id) {
 		const sql = `SELECT * FROM items WHERE userID=${id} ORDER BY uploadtime`
 		const items = await this.db.all(sql)
-		console.log('itemsss')
-		console.log(items)
 		return items
 	}
 	async addDemoItem() {
@@ -69,7 +67,13 @@ class Items {
 	}
 
 	async delete(id) {
-		const sql = `DELETE * FROM items WHERE id=${id};`
+		const sql = `DELETE FROM items WHERE itemID=${id};`
+		await this.db.run(sql)
+		return true
+	}
+
+	async update(status, id) {
+		const sql = `UPDATE items SET status="${status}" WHERE itemID=${id};`
 		await this.db.run(sql)
 		return true
 	}

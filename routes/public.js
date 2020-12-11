@@ -10,9 +10,9 @@ import Items from '../modules/items.js'
 const dbName = 'website.db'
 
 /**
- * The home page.
+ * The index page.
  *
- * @name Home Page
+ * @name Index Page
  * @route {GET} /
  */
 router.get('/', async ctx => {

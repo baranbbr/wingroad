@@ -191,34 +191,38 @@ input:focus {
 }
 
 main form {
-	/* height: 60vh; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 }
 
+main .card form {
+	display: block;
+}
+
 main button.update {
 	border: 0;
 	background-color: var(--light-link);
 	color: var(--light);
-	padding: 1rem 2rem;
-	border-radius: 0.3rem;
-	font-size: 1rem;
-	cursor: pointer;
-	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-}
-main button.delete {
-	border: 0;
-	background-color: var(--light-link);
-	color: var(--light);
-	padding: 1rem 2rem;
+	padding: 1rem 1.2rem;
+	margin-right: 0.7rem;
 	border-radius: 0.3rem;
 	font-size: 1rem;
 	cursor: pointer;
 	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
+main button.delete {
+	border: 0;
+	background-color: #d6666d;
+	color: var(--light);
+	padding: 1rem 1.2rem;
+	border-radius: 0.3rem;
+	font-size: 1rem;
+	cursor: pointer;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
 
 main button:hover {
 	transform: scale(1.1);

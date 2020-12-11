@@ -311,3 +311,12 @@ main button:hover {
 	transform: scale(1.1);
 	transition: all 0.3s ease-in-out;
 }
+
+main a {
+	border: 1px solid pink;
+	position: fixed;
+	bottom: 5vh;
+	text-decoration: none;
+	padding: 0.4rem 1rem;
+	background-color: var(--light);
+}

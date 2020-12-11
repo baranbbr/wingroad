@@ -46,34 +46,33 @@
 	{{/if}}
 	<main>
 		<p>These are your items. Here you can update the details as well as delete your items.</p>
-		<section class="card-container">
-			{{#each userItems}}
-			<article class="card">
-				<img src="{{thumbnail}}" alt="">
-				<h1 class="card-heading">{{name}}</h1>
-				<p class="card-field">£{{price}}</p>
-				<p class="card-field status">{{status}}</p>
-				<form action="/sell/update/{{itemID}}" method="post">
-					<div class="select">
-						<select name="status" class="select-status">
-							<option value="for sale">For Sale</option>
-							<option value="under offer">Under Offer</option>
-							<option value="sold">Sold</option>
-						</select>
-					</div>
-					<div class="btn-container">
-						<button class="update" type="submit">
-							Update
-						</button>
-						<button class="delete" formaction="/sell/del/{{itemID}}">
-							Delete
-						</button>
-					</div>
-				</form>
-			</article>
-			{{/each}}
+		<section>
+
+			<form action="/add" enctype="multipart/form-data" method="post">
+				<p>
+					<label for="name">Name</label><br />
+					<input type="text" name="name" placeholder="name of item" autofocus value="{{body.name}}">
+				</p>
+				<div class="select">
+					<select name="status" class="select-status">
+						<option value="for sale" selected>For Sale</option>
+						<option value="under offer">Under Offer</option>
+						<option value="sold">Sold</option>
+					</select>
+				</div>
+				<p>
+					<label for="price">Password</label><br />
+					<input type="text" name="price" placeholder="your asking price" value=" {{body.price}}">
+				</p>
+				<p>
+					<label for="thumbnail">Email</label><br />
+					<input type="file" accept="image/*" capture name="thumbnail" value="{{body.file}}">
+				</p>
+				<button class="update" type="submit">
+					Add
+				</button>
+			</form>
 		</section>
-		<a href="/add" class="new-item">Add New Item</a>
 	</main>
 	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
 	<script type="module" src="main.js"></script>

@@ -63,7 +63,7 @@ router.post('/register', async ctx => {
 /**
  * The login page.
  *
- * @name Login
+ * @name Login Page
  * @route {GET} /login
  */
 router.get('/login', async ctx => {
@@ -74,7 +74,7 @@ router.get('/login', async ctx => {
 /**
  * The script to authorise login details.
  *
- * @name Login Authorisation
+ * @name Login Script
  * @route {POST} /login
  */
 router.post('/login', async ctx => {
@@ -96,9 +96,9 @@ router.post('/login', async ctx => {
 })
 
 /**
- * Logout user.
+ * Script to deauthorise user.
  *
- * @name Logout Unauthorise user.
+ * @name Logout Script.
  * @route {GET} /logout
  */
 router.get('/logout', async ctx => {

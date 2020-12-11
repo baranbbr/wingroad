@@ -1,16 +1,11 @@
 
 import Router from 'koa-router'
-import bodyParser from 'koa-body'
-import fs from 'fs'
-import os from 'os'
-import path from 'path'
 
 const router = new Router()
 // router.use(bodyParser({ formidable: {
 // 	uploadDir: '../public/images'
 // }}))
 
-import Accounts from '../modules/accounts.js'
 import Items from '../modules/items.js'
 const dbName = 'website.db'
 
@@ -38,7 +33,7 @@ router.post('/add', async ctx => {
 		ctx.hbs.body = ctx.request.body
 		console.log(body)
 		console.log('hi')
-		await item.userItem(body.name, body.thumbnail, 
+		await item.userItem(body.name, body.thumbnail,
 			body.description, body.price, ctx.session.userID)
 		return ctx.redirect('/sell?msg=item added')
 	} catch (err) {
@@ -48,7 +43,5 @@ router.post('/add', async ctx => {
 		item.close()
 	}
 })
-
-
 
 export default router

@@ -7,7 +7,6 @@ router.use(bodyParser({ multipart: true }))
 
 import Accounts from '../modules/accounts.js'
 import Items from '../modules/items.js'
-import Init from '../modules/initialise.js'
 const dbName = 'website.db'
 
 /**

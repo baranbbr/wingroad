@@ -42,7 +42,7 @@ body.dark a:visited {
 	color: var(--dark-link);
 }
 
-body.dark button {
+body.dark #nav button {
 	color: var(--dark-link)
 }
 
@@ -196,4 +196,31 @@ main form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+}
+
+main button.update {
+	border: 0;
+	background-color: var(--light-link);
+	color: var(--light);
+	padding: 1rem 2rem;
+	border-radius: 0.3rem;
+	font-size: 1rem;
+	cursor: pointer;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+main button.delete {
+	border: 0;
+	background-color: var(--light-link);
+	color: var(--light);
+	padding: 1rem 2rem;
+	border-radius: 0.3rem;
+	font-size: 1rem;
+	cursor: pointer;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+main button:hover {
+	transform: scale(1.1);
+	transition: all 0.3s ease-in-out;
 }

@@ -3,6 +3,9 @@ import Router from 'koa-router'
 
 const router = new Router({ prefix: '/sell' })
 
+import Items from '../modules/items.js'
+const dbName = 'website.db'
+
 async function checkAuth(ctx, next) {
 	console.log('secure router middleware')
 	console.log(ctx.hbs)
@@ -13,10 +16,13 @@ async function checkAuth(ctx, next) {
 router.use(checkAuth)
 
 router.get('/', async ctx => {
+	const items = await new Items(dbName)
+	const userItems = await items.getUserItems(ctx.session.userID)
+	ctx.hbs.userItems = userItems
+	console.log(ctx.hbs)
 	try {
 		await ctx.render('sell', ctx.hbs)
-	} catch(err) {
-		ctx.hbs.error = err.message
+	} catch (err) {
 		await ctx.render('error', ctx.hbs)
 	}
 })

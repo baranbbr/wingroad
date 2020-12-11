@@ -34,6 +34,16 @@ class Items {
 		const items = await this.db.all(sql)
 		return items
 	}
+	/**
+	 * retrieves all items that are listed by the current logged in user
+	 */
+	async getUserItems(id) {
+		const sql = `SELECT * FROM items WHERE userID=${id} ORDER BY uploadtime`
+		const items = await this.db.all(sql)
+		console.log('itemsss')
+		console.log(items)
+		return items
+	}
 	async addDemoItem() {
 		const sql = 'INSERT INTO items(name, thumbnail, price, status, userID)\
 		VALUES("mona lisa", "https://unsplash.it/500", 500, "for sale", 1)'
@@ -55,6 +65,11 @@ class Items {
 		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
 		await this.db.run(sql)
+		return true
+	}
+
+	async delete(id) {
+		const sql = `DELETE * FROM items WHERE id=${id};`
 		return true
 	}
 

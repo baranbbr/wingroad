@@ -15,6 +15,12 @@ async function checkAuth(ctx, next) {
 
 router.use(checkAuth)
 
+/**
+ * The page for items of specific user.
+ *
+ * @name Users' Page
+ * @route {GET} /sell
+ */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
 	const userItems = await items.getUserItems(ctx.session.userID)
@@ -26,7 +32,12 @@ router.get('/', async ctx => {
 	}
 })
 
-
+/**
+ * The script to delete specific item.
+ *
+ * @name Delete Script
+ * @route {POST} /sell/del/:id
+ */
 router.post('/del/:id', async ctx => {
 	console.log('called delete')
 	const items = await new Items(dbName)
@@ -41,6 +52,12 @@ router.post('/del/:id', async ctx => {
 	}
 })
 
+/**
+ * The script to update a specific item.
+ *
+ * @name Update Script
+ * @route {POST} /sell/update/:id
+ */
 router.post('/update/:id', async ctx => {
 	console.log('called update')
 	const items = await new Items(dbName)

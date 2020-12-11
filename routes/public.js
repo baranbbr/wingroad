@@ -60,11 +60,23 @@ router.post('/register', async ctx => {
 	}
 })
 
+/**
+ * The login page.
+ *
+ * @name Login
+ * @route {GET} /login
+ */
 router.get('/login', async ctx => {
 	console.log(ctx.hbs)
 	await ctx.render('login', ctx.hbs)
 })
 
+/**
+ * The script to authorise login details.
+ *
+ * @name Login Authorisation
+ * @route {POST} /login
+ */
 router.post('/login', async ctx => {
 	const account = await new Accounts(dbName)
 	try {
@@ -83,6 +95,12 @@ router.post('/login', async ctx => {
 	}
 })
 
+/**
+ * Logout user.
+ *
+ * @name Logout Unauthorise user.
+ * @route {GET} /logout
+ */
 router.get('/logout', async ctx => {
 	ctx.session.authorised = null
 	ctx.redirect('/?msg=you are now logged out')

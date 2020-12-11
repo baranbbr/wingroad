@@ -16,16 +16,20 @@ const dbName = 'website.db'
  * @route {GET} /
  */
 router.get('/', async ctx => {
-	// const init = await new Init(dbName)
-	const items = await new Items(dbName)
-	const allitems = await items.getItems()
+	const item = await new Items(dbName)
+	// await item.addDemoItem("Mona Lisa")
+	// await item.addDemoItem("Elizabeth Regina")
+	// await item.addDemoItem("Mobby Dick")
+	// await item.addDemoItem("Frank Lampard")
+	const allitems = await item.getItems()
 	ctx.hbs.items = allitems
-	console.log('ctx.hbs index')
 	console.log(ctx.hbs)
 	try {
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {
 		await ctx.render('error', ctx.hbs)
+	} finally {
+		item.close()
 	}
 })
 

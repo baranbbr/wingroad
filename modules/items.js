@@ -30,7 +30,8 @@ class Items {
 	 * retrieves all items from table items as well as which user added item
 	 */
 	async getItems() {
-		const sql = 'SELECT items.*, users.user, users.phone FROM items, users ORDER BY uploadtime DESC'
+		const sql = 'SELECT items.*, users.user, users.phone\
+		FROM items, users WHERE items.userID=users.id ORDER BY uploadtime DESC'
 		const items = await this.db.all(sql)
 		return items
 	}

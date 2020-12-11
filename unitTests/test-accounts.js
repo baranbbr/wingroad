@@ -8,7 +8,7 @@ test('REGISTER : register and log in with a valid account', async test => {
 	try {
 		await account.register('doej', 'password', 'doej@gmail.com', '014123122')
 		const login = await account.login('doej', 'password')
-		test.is(login, true, 'unable to log in')
+		test.is(login, 1, 'unable to log in')
 	} catch(err) {
 		test.fail('error thrown')
 	} finally {
@@ -106,6 +106,20 @@ test('LOGIN    : invalid password', async test => {
 		test.fail('error not thrown')
 	} catch(err) {
 		test.is(err.message, 'invalid password for account "doej"', 'incorrect error message')
+	} finally {
+		account.close()
+	}
+})
+
+test('getID	: correct id returned ', async test => {
+	test.plan(1)
+	const account = await new Accounts()
+	try {
+		await account.register('doej', 'password', 'doej@gmail.com')
+		const id = await account.login('doej', 'password')
+		test.is(id, 1, 'incorrect id')
+	} catch(err) {
+		test.fail(`error ${err.message}`)
 	} finally {
 		account.close()
 	}

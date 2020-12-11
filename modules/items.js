@@ -30,12 +30,16 @@ class Items {
 	 * retrieves all items from table items as well as which user added item
 	 */
 	async getItems() {
-		// const sql = 'SELECT items.*, users.user FROM items, users ORDER BY uploadtime'
-		const sql = 'SELECT * FROM items'
+		const sql = 'SELECT items.*, users.user, users.phone FROM items, users ORDER BY uploadtime DESC'
 		const items = await this.db.all(sql)
-
-		// console.log('items items.js')
-		// console.log(items)
+		return items
+	}
+	/**
+	 * retrieves all items that are listed by the current logged in user
+	 */
+	async getUserItems(id) {
+		const sql = `SELECT * FROM items WHERE userID=${id} ORDER BY uploadtime`
+		const items = await this.db.all(sql)
 		return items
 	}
 	async addDemoItem() {
@@ -54,10 +58,22 @@ class Items {
 	async addItem(name, thumbnail, price, status, userID) {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
+			return false
 		})
 		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
-		console.log(sql)
+		await this.db.run(sql)
+		return true
+	}
+
+	async delete(id) {
+		const sql = `DELETE FROM items WHERE itemID=${id};`
+		await this.db.run(sql)
+		return true
+	}
+
+	async update(status, id) {
+		const sql = `UPDATE items SET status="${status}" WHERE itemID=${id};`
 		await this.db.run(sql)
 		return true
 	}

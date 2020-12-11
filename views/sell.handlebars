@@ -9,6 +9,8 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
 	<meta name="author" content="Baran Babur">
 	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
+	<link href="{{host}}/styles/index.css" type="text/css" rel="stylesheet" />
+
 	<script type="module" src="main.js"></script>
 </head>
 
@@ -43,8 +45,34 @@
 	</aside>
 	{{/if}}
 	<main>
-		<p>This is a secure page. Users need to have a valid account and be logged in to see it.</p>
-		<p><a href="/">Home page</a></p>
+		<p>These are your items. Here you can update the details as well as delete your items.</p>
+		<section class="card-container">
+			{{#each userItems}}
+			<article class="card">
+				<img src="{{thumbnail}}" alt="">
+				<h1 class="card-heading">{{name}}</h1>
+				<p class="card-field">£{{price}}</p>
+				<p class="card-field status">{{status}}</p>
+				<form action="/sell/update/{{itemID}}" method="post">
+					<div class="select">
+						<select name="status" class="select-status">
+							<option value="for sale">For Sale</option>
+							<option value="under offer">Under Offer</option>
+							<option value="sold">Sold</option>
+						</select>
+					</div>
+					<div class="btn-container">
+						<button class="update" type="submit">
+							Update
+						</button>
+						<button class="delete" formaction="/sell/del/{{itemID}}">
+							Delete
+						</button>
+					</div>
+				</form>
+			</article>
+			{{/each}}
+		</section>
 	</main>
 	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
 	<script type="module" src="main.js"></script>

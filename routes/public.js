@@ -10,21 +10,17 @@ import Items from '../modules/items.js'
 const dbName = 'website.db'
 
 /**
- * The home page.
+ * The index page.
  *
- * @name Home Page
+ * @name Index Page
  * @route {GET} /
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
 	// items.addDemoItem()
 	const allitems = await items.getItems()
-	// allitems ? ctx.hbs.items = allitems : ctx.hbs.items = undefined
 	ctx.hbs.items = allitems
-	console.log(allitems)
-	console.log('ctx items is')
-	console.log(ctx.hbs.items)
-
+	console.log(ctx.hbs)
 	try {
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {
@@ -51,7 +47,6 @@ router.post('/register', async ctx => {
 	const account = await new Accounts(dbName)
 	try {
 		// call the functions in the module
-		console.log(ctx.request.body.user)
 		await account.register(ctx.request.body.user, ctx.request.body.pass,
 			ctx.request.body.email, ctx.request.body.phone)
 		ctx.redirect(`/login?msg=new user "${ctx.request.body.user}" added, you need to log in`)
@@ -65,20 +60,32 @@ router.post('/register', async ctx => {
 	}
 })
 
+/**
+ * The login page.
+ *
+ * @name Login
+ * @route {GET} /login
+ */
 router.get('/login', async ctx => {
 	console.log(ctx.hbs)
 	await ctx.render('login', ctx.hbs)
 })
 
+/**
+ * The script to authorise login details.
+ *
+ * @name Login Authorisation
+ * @route {POST} /login
+ */
 router.post('/login', async ctx => {
 	const account = await new Accounts(dbName)
-	ctx.hbs.body = ctx.request.body
 	try {
 		const body = ctx.request.body
-		console.log(body)
-		await account.login(body.user, body.pass)
+		ctx.session.userID = await account.login(body.user, body.pass)
 		ctx.session.authorised = true
-		const referrer = body.referrer || '/secure'
+		// console.log(ctx.session)
+		const referrer = body.referrer || '/'
+		ctx.hbs.body = ctx.request.body
 		return ctx.redirect(`${referrer}?msg=you are now logged in`)
 	} catch (err) {
 		ctx.hbs.msg = err.message
@@ -88,6 +95,12 @@ router.post('/login', async ctx => {
 	}
 })
 
+/**
+ * Logout user.
+ *
+ * @name Logout Unauthorise user.
+ * @route {GET} /logout
+ */
 router.get('/logout', async ctx => {
 	ctx.session.authorised = null
 	ctx.redirect('/?msg=you are now logged out')

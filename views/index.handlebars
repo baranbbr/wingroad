@@ -26,8 +26,8 @@
 		</div>
 
 		<div class="hidden" id="navLinks">
-			<a href="/" class="">Home</a>
 			{{#if authorised}}
+			<a href="/sell">Sell</a>
 			<a href="/logout">Log out</a>
 			{{else}}
 			<a href="/login">Log in</a>
@@ -42,19 +42,15 @@
 	</aside>
 	{{/if}}
 	<main>
-		<p>This is the home page.</p>
-		{{#if authorised}}
-		<p><a href="/secure">secure page</a></p>
-		{{/if}}
 		<section class="card-container">
 			{{#each items}}
 			<article class="card">
 				<img src="{{thumbnail}}" alt="">
 				<h1 class="card-heading">{{name}}</h1>
-				<p>{{price}}</p>
-				<p>{{status}}</p>
-				<p>{{userID}}</p>
-				<p>{{user}}</p>
+				<p class="card-field">Price: £{{price}}</p>
+				<p class="card-field status">Status: {{status}}</p>
+				<p class="card-field">By: {{user}}</p>
+				<p class="card-field">Phone: {{phone}}</p>
 			</article>
 			{{/each}}
 		</section>

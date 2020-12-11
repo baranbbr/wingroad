@@ -10,8 +10,6 @@
 	<meta name="author" content="Baran Babur">
 	<link href="{{host}}/styles/style.css" type="text/css" rel="stylesheet" />
 	<link href="{{host}}/styles/index.css" type="text/css" rel="stylesheet" />
-
-	<script type="module" src="main.js"></script>
 </head>
 
 <body>
@@ -47,8 +45,7 @@
 	<main>
 		<p>These are your items. Here you can update the details as well as delete your items.</p>
 		<section>
-
-			<form action="/add" enctype="multipart/form-data" method="post">
+			<form action="/add" method="POST">
 				<p>
 					<label for="name">Name</label><br />
 					<input type="text" name="name" placeholder="Name of item" autofocus value="{{body.name}}">
@@ -64,7 +61,7 @@
 				<p>
 					<label for="description">Description</label><br />
 					<textarea name="description" placeholder="Description of your item" rows="4"
-						value="{{body.desc}}"></textarea>
+						value="{{body.description}}"></textarea>
 				</p>
 				<p>
 					<label for="price">Price</label><br />
@@ -72,7 +69,7 @@
 				</p>
 				<p>
 					<label for="thumbnail">Image(s)</label><br />
-					<input type="file" accept="image/*" name="thumbnail" value="{{body.file}}">
+					<input type="file" accept="image/*" name="thumbnail" value="{{files.file}}">
 				</p>
 				<button class="update" type="submit">
 					Add

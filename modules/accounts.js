@@ -20,7 +20,7 @@ class Accounts {
 			this.db = await sqlite.open(dbName)
 			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
-				userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
+				userID INTEGER, description TEXT, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
 				FOREIGN KEY (userID) REFERENCES users(id));'
 			await this.db.run(sqlItems)
 			// we need this table to store the user accounts

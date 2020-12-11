@@ -20,7 +20,7 @@ class Items {
 			// we need this table to store the items of users
 			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
-				userID INTEGER, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
+				userID INTEGER, description TEXT, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
 				FOREIGN KEY (userID) REFERENCES users(id));'
 			await this.db.run(sqlItems)
 			return this
@@ -62,6 +62,17 @@ class Items {
 		})
 		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
 		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
+		await this.db.run(sql)
+		return true
+	}
+
+	async userItem(name, thumbnail, description, price, userID) {
+		Array.from(arguments).forEach( val => {
+			if(val.length === 0) throw new Error('missing field')
+			return false
+		})
+		const sql = `INSERT INTO items(name, thumbnail, price, description, userID) \
+		VALUES("${name}", "${thumbnail}", ${price}, "${description}", ${userID});`
 		await this.db.run(sql)
 		return true
 	}

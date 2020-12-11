@@ -42,9 +42,13 @@ class Items {
 		const items = await this.db.all(sql)
 		return items
 	}
-	async addDemoItem() {
-		const sql = 'INSERT INTO items(name, thumbnail, price, status, userID)\
-		VALUES("mona lisa", "https://unsplash.it/500", 500, "for sale", 1)'
+	/**
+	* adds a new demo item with pre-set values
+	@param {String} name name of the item
+	 */
+	async addDemoItem(name) {
+		const sql = `INSERT INTO items(name, thumbnail, price, status, userID)\
+		VALUES("${name}", "https://unsplash.it/500", 500, "for sale", 1)`
 		await this.db.run(sql)
 	}
 	/**
@@ -65,7 +69,14 @@ class Items {
 		await this.db.run(sql)
 		return true
 	}
-
+	/**
+	 * adds a new user item (with description)
+	 * @param {String} name the name of the item being added
+	 * @param {String} thumbnail an image of the item being added
+	 * @param {String} description description of item
+	 * @param {Integer} price the price of the item being added
+	 * @param {Integer} userID the user adding the item for sale
+	 */
 	async userItem(name, thumbnail, description, price, userID) {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
@@ -102,7 +113,6 @@ class Items {
 	async close() {
 		await this.db.close()
 	}
-
 }
 
 export default Items

@@ -221,7 +221,22 @@ textarea {
 
 @media (min-width: 640px) {
 	input, textarea, select {
-		width: 100%;	
+		width: 40ch;
+	}
+	input[type='submit'] {
+		border: 0;
+		background-color: var(--light-link);
+		padding: 1rem 2rem;
+		border-radius: 0.3rem;
+		font-size: 1rem;
+		cursor: pointer;
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+	}
+	
+	input[type='submit']:hover {
+		background-color: var(--light-link);
+		transform: scale(1.1);
+		transition: all 0.3s ease-in-out;
 	}
 }
 
@@ -253,7 +268,6 @@ select {
 	max-width: 100%;
 	border: 0;
 	border-radius: 0.25rem;
-	/* padding: 0.25rem 0.5rem; */
 	padding: 1rem;
 	font-size: 1rem;
 	cursor: pointer;

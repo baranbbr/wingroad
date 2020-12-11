@@ -196,21 +196,51 @@ input[type='submit']:hover {
 	transition: all 0.3s ease-in-out;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea, select {
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input, textarea, select {
 	font-size: 1rem;
 	max-width: 100%;
 	width: 100%;
-	border: 1px solid #cccccc;
 	padding: 1rem;
+	font-family: inherit;
+}
+
+textarea {
+	resize: vertical;
 }
 
 @media (min-width: 640px) {
-	input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea, select {
-		width: 30vw;	
+	input, textarea, select {
+		width: 40ch;
+	}
+	input[type='submit'] {
+		border: 0;
+		background-color: var(--light-link);
+		padding: 1rem 2rem;
+		border-radius: 0.3rem;
+		font-size: 1rem;
+		cursor: pointer;
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+	}
+	
+	input[type='submit']:hover {
+		background-color: var(--light-link);
+		transform: scale(1.1);
+		transition: all 0.3s ease-in-out;
 	}
 }
 
+textarea:focus,
 input:focus {
 	outline: #aaaaaa solid 1px;
 }
@@ -234,11 +264,11 @@ select {
 }
 
 .select {
-	min-width: 15ch;
-	max-width: 30ch;
+	min-width: 25ch;
+	max-width: 100%;
 	border: 0;
 	border-radius: 0.25rem;
-	padding: 0.25rem 0.5rem;
+	padding: 1rem;
 	font-size: 1rem;
 	cursor: pointer;
 	line-height: 1.1;
@@ -310,4 +340,14 @@ main button.delete {
 main button:hover {
 	transform: scale(1.1);
 	transition: all 0.3s ease-in-out;
+}
+
+main a {
+	border: 1px solid pink;
+	position: fixed;
+	right: 5vh;
+	top: 10vh;
+	text-decoration: none;
+	padding: 0.4rem 1rem;
+	background-color: var(--light);
 }

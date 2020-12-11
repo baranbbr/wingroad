@@ -16,15 +16,20 @@ const dbName = 'website.db'
  * @route {GET} /
  */
 router.get('/', async ctx => {
-	const items = await new Items(dbName)
-	// items.addDemoItem()
-	const allitems = await items.getItems()
+	const item = await new Items(dbName)
+	// await item.addDemoItem("Mona Lisa")
+	// await item.addDemoItem("Elizabeth Regina")
+	// await item.addDemoItem("Mobby Dick")
+	// await item.addDemoItem("Frank Lampard")
+	const allitems = await item.getItems()
 	ctx.hbs.items = allitems
 	console.log(ctx.hbs)
 	try {
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {
 		await ctx.render('error', ctx.hbs)
+	} finally {
+		item.close()
 	}
 })
 
@@ -63,7 +68,7 @@ router.post('/register', async ctx => {
 /**
  * The login page.
  *
- * @name Login
+ * @name Login Page
  * @route {GET} /login
  */
 router.get('/login', async ctx => {
@@ -74,7 +79,7 @@ router.get('/login', async ctx => {
 /**
  * The script to authorise login details.
  *
- * @name Login Authorisation
+ * @name Login Script
  * @route {POST} /login
  */
 router.post('/login', async ctx => {
@@ -96,9 +101,9 @@ router.post('/login', async ctx => {
 })
 
 /**
- * Logout user.
+ * Script to deauthorise user.
  *
- * @name Logout Unauthorise user.
+ * @name Logout Script.
  * @route {GET} /logout
  */
 router.get('/logout', async ctx => {

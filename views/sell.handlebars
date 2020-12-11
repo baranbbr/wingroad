@@ -51,9 +51,8 @@
 			<article class="card">
 				<img src="{{thumbnail}}" alt="">
 				<h1 class="card-heading">{{name}}</h1>
-				<p>{{price}}</p>
-				<p>{{status}}</p>
-				<p>itemID {{itemID}}</p>
+				<p class="card-field">£{{price}}</p>
+				<p class="card-field status">{{status}}</p>
 				<form action="/sell/update/{{itemID}}" method="post">
 					<div class="select">
 						<select name="status" class="select-status">

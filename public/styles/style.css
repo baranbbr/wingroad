@@ -270,6 +270,12 @@ main form {
 	flex-direction: column;
 }
 
+main .card-field {
+	text-transform: capitalize;
+	border: 1px solid var(--light);
+	padding: 0.5rem;
+}
+
 main .card form {
 	display: block;
 	padding-bottom: 1rem;

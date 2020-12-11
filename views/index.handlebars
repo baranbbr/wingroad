@@ -47,11 +47,10 @@
 			<article class="card">
 				<img src="{{thumbnail}}" alt="">
 				<h1 class="card-heading">{{name}}</h1>
-				<p>{{price}}</p>
-				<p>{{status}}</p>
-				<p>{{userID}}</p>
-				<p>{{user}}</p>
-				<button></button>
+				<p class="card-field">Price: £{{price}}</p>
+				<p class="card-field status">Status: {{status}}</p>
+				<p class="card-field">By: {{user}}</p>
+				<p class="card-field">Phone: {{phone}}</p>
 			</article>
 			{{/each}}
 		</section>

@@ -18,21 +18,33 @@ async function checkAuth(ctx, next) {
 
 router.use(checkAuth)
 
+/**
+ * The add new item page.
+ *
+ * @name Add Page
+ * @route {GET} /add
+ */
 router.get('/add', async ctx => {
 	try {
+		console.log('ctx.hbs')
+		console.log(ctx.hbs)
 		await ctx.render('add', ctx.hbs)
 	} catch (err) {
 		await ctx.render('error', ctx.hbs)
 	}
 })
 
+/**
+ * Script to add new items.
+ *
+ * @name Add Page
+ * @route {POST} /add
+ */
 router.post('/add', async ctx => {
 	const item = await new Items(dbName)
 	try {
 		const body = ctx.request.body
 		ctx.hbs.body = ctx.request.body
-		console.log(body)
-		console.log('hi')
 		await item.userItem(body.name, body.thumbnail,
 			body.description, body.price, ctx.session.userID)
 		return ctx.redirect('/sell?msg=item added')

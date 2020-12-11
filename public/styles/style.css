@@ -331,7 +331,8 @@ main button:hover {
 main a {
 	border: 1px solid pink;
 	position: fixed;
-	bottom: 5vh;
+	right: 5vh;
+	top: 10vh;
 	text-decoration: none;
 	padding: 0.4rem 1rem;
 	background-color: var(--light);

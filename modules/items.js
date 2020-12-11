@@ -71,24 +71,34 @@ class Items {
 			if(val.length === 0) throw new Error('missing field')
 			return false
 		})
-		const sql = `INSERT INTO items(name, thumbnail, price, description, userID) \
-		VALUES("${name}", "${thumbnail}", ${price}, "${description}", ${userID});`
+		const sql = `INSERT INTO items(name, thumbnail, price, description, status, userID) \
+		VALUES("${name}", "${thumbnail}", ${price}, "${description}", "for sale", ${userID});`
 		await this.db.run(sql)
 		return true
 	}
-
+	/**
+	 * deletes an item
+	 * @param {Integer} id id of the item being deleted
+	 */
 	async delete(id) {
 		const sql = `DELETE FROM items WHERE itemID=${id};`
 		await this.db.run(sql)
 		return true
 	}
 
+	/**
+	 * upates the status of an item
+	 * @param {String} status new status of the item
+	 * @param {Integer} id id of the item being deleted
+	*/
 	async update(status, id) {
 		const sql = `UPDATE items SET status="${status}" WHERE itemID=${id};`
 		await this.db.run(sql)
 		return true
 	}
-
+	/**
+	 * closes connection to database
+	*/
 	async close() {
 		await this.db.close()
 	}

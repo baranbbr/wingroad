@@ -17,9 +17,9 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	const items = await new Items(dbName)
-	// items.addDemoItem()
 	const allitems = await items.getItems()
 	ctx.hbs.items = allitems
+	console.log('ctx.hbs index')
 	console.log(ctx.hbs)
 	try {
 		await ctx.render('index', ctx.hbs)

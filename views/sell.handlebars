@@ -54,6 +54,9 @@
 				<p class="card-field">£{{price}}</p>
 				<p class="card-field status">{{status}}</p>
 				<form action="/sell/update/{{itemID}}" method="post">
+					<p>
+						<label for="status">Update Status</label>
+					</p>
 					<div class="select">
 						<select name="status" class="select-status">
 							<option value="for sale">For Sale</option>

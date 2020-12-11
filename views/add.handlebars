@@ -51,8 +51,9 @@
 			<form action="/add" enctype="multipart/form-data" method="post">
 				<p>
 					<label for="name">Name</label><br />
-					<input type="text" name="name" placeholder="name of item" autofocus value="{{body.name}}">
+					<input type="text" name="name" placeholder="Name of item" autofocus value="{{body.name}}">
 				</p>
+				<label for="select">Status</label>
 				<div class="select">
 					<select name="status" class="select-status">
 						<option value="for sale" selected>For Sale</option>
@@ -61,11 +62,16 @@
 					</select>
 				</div>
 				<p>
-					<label for="price">Password</label><br />
-					<input type="text" name="price" placeholder="your asking price" value=" {{body.price}}">
+					<label for="description">Description</label><br />
+					<textarea name="description" placeholder="Description of your item" rows="4"
+						value="{{body.desc}}"></textarea>
 				</p>
 				<p>
-					<label for="thumbnail">Email</label><br />
+					<label for="price">Price</label><br />
+					<input type="number" name="price" placeholder="Your asking price" value="{{body.price}}">
+				</p>
+				<p>
+					<label for="thumbnail">Image(s)</label><br />
 					<input type="file" accept="image/*" name="thumbnail" value="{{body.file}}">
 				</p>
 				<button class="update" type="submit">

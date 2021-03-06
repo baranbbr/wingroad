@@ -43,16 +43,13 @@ class Accounts {
 		Array.from(arguments).forEach( val => {
 			if(val.length === 0) throw new Error('missing field')
 		})
-		let sql = `SELECT COUNT(id) as records FROM users WHERE user="${user}";`
-		const data = await this.db.get(sql)
-		if(data.records !== 0) throw new Error(`username "${user}" already in use`)
-		sql = `SELECT COUNT(id) as records FROM users WHERE email="${email}";`
-		const emails = await this.db.get(sql)
-		if(emails.records !== 0) throw new Error(`email address "${email}" is already in use`)
+		const data = await this.db.get('SELECT COUNT(id) as records FROM users WHERE user=?;', [user])
+		if(data.records !== 0) throw new Error('Username already in use.')
+		const emails = await this.db.get('SELECT COUNT(id) as records FROM users WHERE email=?;', [email])
+		if(emails.records !== 0) throw new Error('Email is already in use.')
 		pass = await bcrypt.hash(pass, saltRounds)
-		sql = `INSERT INTO users(user, pass, email, phone)\
-		VALUES("${user}", "${pass}", "${email}", "${phone}")`
-		await this.db.run(sql)
+		await this.db.run('INSERT INTO users(user, pass, email, phone)\
+		VALUES(?, ?, ?, ?)', [user, pass, email, phone])
 		return true
 	}
 
@@ -63,14 +60,12 @@ class Accounts {
 	 * @returns {Integer} returns id of account
 	 */
 	async login(username, password) {
-		let sql = `SELECT id FROM users WHERE user="${username}";`
-		const record = await this.db.get(sql)
+		const record = await this.db.get('SELECT id FROM users WHERE user=?;', [username])
 
-		if(record === undefined) throw new Error(`username "${username}" not found`)
-		sql = `SELECT pass FROM users WHERE user = "${username}";`
-		const passRecord = await this.db.get(sql)
+		if(record === undefined) throw new Error('Username couldn\'t be found')
+		const passRecord = await this.db.get('SELECT pass FROM users WHERE user= ?;', [username])
 		const valid = await bcrypt.compare(password, passRecord.pass)
-		if(valid === false) throw new Error(`invalid password for account "${username}"`)
+		if(valid === false) throw new Error('Account details are incorrect.')
 		return record.id
 	}
 

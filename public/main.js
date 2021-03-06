@@ -33,7 +33,8 @@ function isDarkModeEnabled() {
 	return enabled
 }
 
-if(isDarkModeEnabled()) body.classList.add('dark')
+isDarkModeEnabled() && body.classList.add('dark')
+// if(isDarkModeEnabled()) body.classList.add('dark')
 
 theme.addEventListener('click', () => {
 	body.classList.toggle('dark')

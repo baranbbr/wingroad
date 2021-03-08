@@ -39,8 +39,7 @@ class Items {
 	 * retrieves all items that are listed by the current logged in user
 	 */
 	async getUserItems(id) {
-		const sql = `SELECT * FROM items WHERE userID=${id} ORDER BY uploadtime`
-		const items = await this.db.all(sql)
+		const items = await this.db.all('SELECT * FROM items WHERE userID=? ORDER BY uploadtime', [id])
 		return items
 	}
 	/**
@@ -48,9 +47,8 @@ class Items {
 	@param {String} name name of the item
 	 */
 	async addDemoItem(name) {
-		const sql = `INSERT INTO items(name, thumbnail, price, status, userID)\
-		VALUES("${name}", "https://unsplash.it/500", 500, "for sale", 1)`
-		await this.db.run(sql)
+		await this.db.run('INSERT INTO items(name, thumbnail, price, status, userID)\
+		VALUES(?, "https://unsplash.it/500", 500, "for sale", 1)', [name])
 	}
 	/**
 	 * adds a new item
@@ -65,9 +63,8 @@ class Items {
 			if(val.length === 0) throw new Error('missing field')
 			return false
 		})
-		const sql = `INSERT INTO items(name, thumbnail, price, status, userID) \
-		VALUES("${name}", "${thumbnail}", ${price}, "${status}", ${userID});`
-		await this.db.run(sql)
+		await this.db.run('INSERT INTO items(name, thumbnail, price, status, userID)\
+		VALUES(?, ?, ?, ?, ?);', [name, thumbnail, price, status, userID])
 		return true
 	}
 	/**
@@ -83,9 +80,8 @@ class Items {
 			if(val.length === 0) throw new Error('missing field')
 			return false
 		})
-		const sql = `INSERT INTO items(name, thumbnail, price, description, status, userID) \
-		VALUES("${name}", "${thumbnail}", ${price}, "${description}", "for sale", ${userID});`
-		await this.db.run(sql)
+		await this.db.run('INSERT INTO items(name, thumbnail, price, description, status, userID) \
+		VALUES(?, ?, ?, ?, "for sale", ?);', [name, thumbnail, price, description, userID])
 		return true
 	}
 	/**
@@ -93,8 +89,7 @@ class Items {
 	 * @param {Integer} id id of the item being deleted
 	 */
 	async delete(id) {
-		const sql = `DELETE FROM items WHERE itemID=${id};`
-		await this.db.run(sql)
+		await this.db.run('DELETE FROM items WHERE itemID=?;', [id])
 		return true
 	}
 
@@ -104,8 +99,7 @@ class Items {
 	 * @param {Integer} id id of the item being deleted
 	*/
 	async update(status, id) {
-		const sql = `UPDATE items SET status="${status}" WHERE itemID=${id};`
-		await this.db.run(sql)
+		await this.db.run('UPDATE items SET status=? WHERE itemID=?;', [status, id])
 		return true
 	}
 	/**

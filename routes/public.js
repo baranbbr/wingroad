@@ -33,6 +33,19 @@ router.get('/', async ctx => {
 	}
 })
 
+router.get('/home', async ctx => {
+	const item = await new Items(dbName)
+	const allitems = await item.getItems()
+	ctx.hbs.items = allitems
+	console.log(ctx.hbs)
+	try {
+		await ctx.render('home', ctx.hbs)
+	} catch (err) {
+		await ctx.render('error', ctx.hbs)
+	} finally {
+		item.close()
+	}
+})
 
 /**
  * The user registration page.

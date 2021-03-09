@@ -1,18 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="utf-8">
-	<title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wingroad Homepage</title>
 	<meta name="description" content="Artists, designers and photographers can sell their pieces.">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
 	<meta name="author" content="Baran Babur">
-	<link href="styles/style.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
+	<link href="styles/home.css" rel="stylesheet" />
 	<link href="styles/index.css" rel="stylesheet" />
-</head>
 
+</head>
 <body>
-	<header id="nav" class="sticky">
+    <header id="nav">
 		<div class="nav-heading">
 			<h1>
 				<a href="/">Wingroad</a>
@@ -36,28 +37,15 @@
 			<button id="theme">Toggle Theme</button>
 		</div>
 	</header>
-	{{#if msg}}
-	<aside>
-		<p class="msg">{{msg}}</p>
-	</aside>
-	{{/if}}
-	<main>
-		<p>Welcome to Wingroad, here you will find all the listings by every user!</p>
-		<section class="card-container">
-			{{#each items}}
-			<article class="card">
-				<img src="{{thumbnail}}" alt="">
-				<h1 class="card-heading">{{name}}</h1>
-				<p class="card-field">Price: £{{price}}</p>
-				<p class="card-field status">Status: {{status}}</p>
-				<p class="card-field">By: {{user}}</p>
-				<p class="card-field">Phone: {{phone}}</p>
-			</article>
-			{{/each}}
-		</section>
-	</main>
-	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
-	<script type="module" src="main.js"></script>
-</body>
 
+	<section>
+		<h1>Creators deserve to get paid for their work.</h1>
+		<p>Wingroad makes it easy.</p>
+		<div class="cta-container">
+			<a href="/register" class="button btn-sell">Start selling</a>
+			<a href="/home" class="button btn-view">View listings</a>
+		</div>
+	</section>
+	<script src="main.js"></script>
+</body>
 </html>

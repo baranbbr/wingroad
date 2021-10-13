@@ -1,6 +1,8 @@
 
+import koaBody from 'koa-body'
 import Router from 'koa-router'
 
+const mime = require('mime-types')
 const router = new Router()
 // router.use(bodyParser({ formidable: {
 // 	uploadDir: '../public/images'
@@ -40,20 +42,29 @@ router.get('/add', async ctx => {
  * @name Add Page
  * @route {POST} /add
  */
-router.post('/add', async ctx => {
-	const item = await new Items(dbName)
-	try {
-		const body = ctx.request.body
-		ctx.hbs.body = ctx.request.body
-		await item.userItem(body.name, body.thumbnail,
-			body.description, body.price, ctx.session.userID)
-		return ctx.redirect('/sell?msg=item added')
-	} catch (err) {
-		console.log(err)
-		await ctx.render('error', ctx.hbs)
-	} finally {
-		item.close()
-	}
+router.post('/add', koaBody({multipart: true, uploadDir: '.'}),
+	async ctx => {
+		// const item = await new Items(dbName)
+		try {
+			// const body = ctx.request.body
+			// ctx.hbs.body = ctx.request.body
+			const { path, name, type } = ctx.request.files.thumbnail
+			console.log(`path: ${path}`)
+      		console.log(`filename: ${name}`)
+      		console.log(`type: ${type}`)
+			const fileExtension = mime.extension(type)
+			console.log(`fileExtension: ${fileExtension}`)
+			// console.log(`name is: ${name}`)
+			// await fs.copy(path, `../avatars/${name}`)
+			// await item.userItem(body.name, name,
+			// 	body.description, body.price, ctx.session.userID)
+			return ctx.redirect('/sell?msg=item added')
+		} catch (err) {
+			console.log(err.message)
+			await ctx.render('error', error.message)
+		} finally {
+			item.close()
+		}
 })
 
 export default router

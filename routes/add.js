@@ -2,7 +2,6 @@
 import koaBody from 'koa-body'
 import Router from 'koa-router'
 
-const mime = require('mime-types')
 const router = new Router()
 // router.use(bodyParser({ formidable: {
 // 	uploadDir: '../public/images'
@@ -52,8 +51,6 @@ router.post('/add', koaBody({multipart: true, uploadDir: '.'}),
 			console.log(`path: ${path}`)
       		console.log(`filename: ${name}`)
       		console.log(`type: ${type}`)
-			const fileExtension = mime.extension(type)
-			console.log(`fileExtension: ${fileExtension}`)
 			// console.log(`name is: ${name}`)
 			// await fs.copy(path, `../avatars/${name}`)
 			// await item.userItem(body.name, name,

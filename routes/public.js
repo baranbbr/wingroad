@@ -16,14 +16,12 @@ const dbName = 'website.db'
  * @route {GET} /
  */
 router.get('/', async ctx => {
-	const account = await new Accounts(dbName)
-	await account.registerDemoAccount()
-	// TODO: if length of items is 0 then add demo items could check here rather than in items !!
-	// TODO: if items length is 0 then create demo account in accounts.js THEN afterwards add demo items
 	const item = await new Items(dbName)
 	const allitems = await item.getItems()
+
 	ctx.hbs.items = allitems
 	console.log(ctx.hbs)
+
 	try {
 		await ctx.render('index', ctx.hbs)
 	} catch (err) {

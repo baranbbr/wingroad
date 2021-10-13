@@ -1,7 +1,9 @@
 /** @module Items */
 
 import sqlite from 'sqlite-async'
+import Accounts from './accounts.js'
 
+const dbName = 'website.db'
 /**
  * Items
  * ES6 module that handles adding and retrieving items that users want to sell.
@@ -12,7 +14,7 @@ class Items {
    * @param {String} [dbName=":memory:"] - The name of the database file to use.
    */
 	constructor(dbName = ':memory:') {
-		return (async () => {
+		return (async() => {
 			this.db = await sqlite.open(dbName)
 			const sql = 'CREATE TABLE IF NOT EXISTS \
 			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
@@ -32,13 +34,15 @@ class Items {
 	async getItems() {
 		const sql = 'SELECT items.*, users.user, users.phone\
 		FROM items, users ORDER BY uploadtime DESC'
-		const items = await this.db.all(sql)
+		let items = await this.db.all(sql)
 		if (items.length === 0) {
-
+			const account = await new Accounts(dbName)
+			await account.registerDemoAccount()
 			for (let i = 0; i <= 10; i++) {
 				await this.addDemoItem(`Demo item #${i}`)
 			}
 		}
+		items = await this.db.all(sql)
 		return items
 	}
 	/**

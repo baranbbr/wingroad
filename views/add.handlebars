@@ -44,38 +44,36 @@
 	{{/if}}
 	<main>
 		<p>These are your items. Here you can update the details as well as delete your items.</p>
-		<section>
-			<form action="/add" method="POST" enctype="multipart/form-data">
-				<p>
-					<label for="name">Name</label><br />
-					<input type="text" name="name" placeholder="Name of item" autofocus value="{{body.name}}">
-				</p>
-				<label for="select">Status</label>
-				<div class="select">
-					<select name="status" class="select-status">
-						<option value="for sale" selected>For Sale</option>
-						<option value="under offer">Under Offer</option>
-						<option value="sold">Sold</option>
-					</select>
-				</div>
-				<p>
-					<label for="description">Description</label><br />
-					<textarea name="description" placeholder="Description of your item" rows="4"
-						value="{{body.description}}"></textarea>
-				</p>
-				<p>
-					<label for="price">Price</label><br />
-					<input type="number" name="price" placeholder="Your asking price" value="{{body.price}}">
-				</p>
-				<p>
-					<label for="thumbnail">Image</label><br />
-					<input type="file" accept="image/*" name="thumbnail">
-				</p>
-				<button class="update" type="submit">
-					Add
-				</button>
-			</form>
-		</section>
+		<form action="/add" method="POST" enctype="multipart/form-data">
+			<p>
+				<label for="itemName">Name</label><br />
+				<input type="text" name="itemName" placeholder="Name of item" autofocus value="{{body.itemName}}">
+			</p>
+			<label for="select">Status</label>
+			<div class="select">
+				<select name="status" class="select-status" value="{{body.status}}">
+					<option value="for sale" selected>For Sale</option>
+					<option value="under offer">Under Offer</option>
+					<option value="sold">Sold</option>
+				</select>
+			</div>
+			<p>
+				<label for="description">Description</label><br />
+				<textarea name="description" placeholder="Description of your item" rows="4"
+					value="{{body.description}}"></textarea>
+			</p>
+			<p>
+				<label for="price">Price</label><br />
+				<input type="number" name="price" placeholder="Your asking price" value="{{body.price}}">
+			</p>
+			<p>
+				<label for="thumbnail">Image</label><br />
+				<input type="file" accept="image/*" name="thumbnail">
+			</p>
+			<button class="update" type="submit">
+				Add
+			</button>
+		</form>
 	</main>
 	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
 	<script type="module" src="main.js"></script>

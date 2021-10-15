@@ -4,7 +4,8 @@
 	"description": "A simple dynamic website template to be used as the base for various projects",
 	"main": "index.js",
 	"engines": {
-		"node": "12.x"
+		"node": "12.x",
+		"npm": "7.x"
 	},
 	"type": "module",
 	"ava": {
@@ -22,6 +23,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@heroku-cli/plugin-buildpacks": "^7.54.0",
 		"@heroku/buildpack-registry": "^1.0.1",
 		"bcrypt": "^5.0.1",
 		"bcrypt-promise": "^2.0.0",

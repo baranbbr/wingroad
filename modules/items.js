@@ -40,7 +40,7 @@ class Items {
 		if (items.length === 0) {
 			const account = await new Accounts(dbName)
 			await account.registerDemoAccount()
-			for (let i = 0; i <= 10; i++) {
+			for (let i = 0; i <= 5; i++) {
 				await this.addDemoItem(`Demo item #${i}`)
 			}
 		}

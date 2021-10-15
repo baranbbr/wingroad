@@ -4,7 +4,7 @@
 	"description": "A simple dynamic website template to be used as the base for various projects",
 	"main": "index.js",
 	"engines": {
-		"node": "12.x",
+		"node": "14.x",
 		"npm": "7.x"
 	},
 	"type": "module",

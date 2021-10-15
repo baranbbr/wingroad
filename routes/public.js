@@ -19,7 +19,7 @@ router.get('/', async ctx => {
 	const allitems = await item.getItems()
 
 	ctx.hbs.items = allitems
-	console.log(ctx.hbs)
+	// console.log(ctx.hbs)
 
 	try {
 		await ctx.render('index', ctx.hbs)

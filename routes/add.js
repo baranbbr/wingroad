@@ -1,10 +1,8 @@
-
+import koaBody from 'koa-body'
 import Router from 'koa-router'
+import { rename } from 'fs/promises'
 
 const router = new Router()
-// router.use(bodyParser({ formidable: {
-// 	uploadDir: '../public/images'
-// }}))
 
 import Items from '../modules/items.js'
 const dbName = 'website.db'
@@ -43,17 +41,22 @@ router.get('/add', async ctx => {
 router.post('/add', async ctx => {
 	const item = await new Items(dbName)
 	try {
-		const body = ctx.request.body
-		ctx.hbs.body = ctx.request.body
-		await item.userItem(body.name, body.thumbnail,
-			body.description, body.price, ctx.session.userID)
+		const { path, name, type } = ctx.request.files.avatar;
+		const { itemName, status, description, price } = ctx.request.body
+		console.log(ctx.request.body)
+		console.log(`path: ${path}`)
+		console.log(`filename: ${name}`)
+		console.log(`type: ${type}`)
+		await rename(path, `public/thumbs/${name}`)
+		await item.userItem(itemName, `thumbs/${name}`,
+			price, status, ctx.session.userID, description)
 		return ctx.redirect('/sell?msg=item added')
-	} catch (err) {
-		console.log(err)
-		await ctx.render('error', ctx.hbs)
-	} finally {
-		item.close()
-	}
+		} catch (err) {
+			console.log(err.message)
+			await ctx.render('error', err.message)
+		} finally {
+			item.close()
+		}
 })
 
 export default router

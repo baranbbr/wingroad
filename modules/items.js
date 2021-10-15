@@ -33,8 +33,10 @@ class Items {
 	 */
 	async getItems() {
 		const sql = 'SELECT items.*, users.user, users.phone\
-		FROM items, users ORDER BY uploadtime DESC'
+		FROM items, users WHERE items.userID=users.id ORDER BY uploadtime DESC'
 		let items = await this.db.all(sql)
+		console.log(`items are: ${items}`)
+		console.log(`items length: ${items.length}`)
 		if (items.length === 0) {
 			const account = await new Accounts(dbName)
 			await account.registerDemoAccount()
@@ -57,9 +59,12 @@ class Items {
 	@param {String} name name of the item
 	 */
 	async addDemoItem(name) {
-		const num = Math.floor(Math.random() * (550 - 450) + 450)
-		await this.db.run(`INSERT INTO items(name, thumbnail, price, status, userID)\
-		VALUES(?, "https://unsplash.it/${num}", 500, "for sale", NULL)`, [name])
+		const rimgSize = Math.floor(Math.random() * (550 - 450) + 450)
+		const rPrice = Math.floor(Math.random() * (1000 - 10) + 10)
+		const descriptions = ['Just painted get it now!', 'Took me 50 hours.', 'This piece is one of my best.']
+		const rDesc = descriptions[Math.floor(Math.random()*descriptions.length)]
+
+		await this.userItem(name, `https://unsplash.it/${rimgSize}`, rPrice, "for sale", 1, rDesc)
 	}
 	/**
 	 * adds a new item
@@ -82,17 +87,18 @@ class Items {
 	 * adds a new user item (with description)
 	 * @param {String} name the name of the item being added
 	 * @param {String} thumbnail an image of the item being added
-	 * @param {String} description description of item
+	 * @param {String} status status of the item
 	 * @param {Integer} price the price of the item being added
 	 * @param {Integer} userID the user adding the item for sale
+	 * @param {String} description description of item
 	 */
-	async userItem(name, thumbnail, description, price, userID) {
+	async userItem(name, thumbnail, price, status, userID, description) {
 		Array.from(arguments).forEach(val => {
 			if (val.length === 0) throw new Error('missing field')
 			return false
 		})
-		await this.db.run('INSERT INTO items(name, thumbnail, price, description, status, userID) \
-		VALUES(?, ?, ?, ?, "for sale", ?);', [name, thumbnail, price, description, userID])
+		await this.db.run('INSERT INTO items(name, thumbnail, price, status, userID, description) \
+		VALUES(?, ?, ?, ?, ?, ?);', [name, thumbnail, price, status, userID, description])
 		return true
 	}
 	/**

@@ -3,6 +3,7 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import views from 'koa-views'
 import session from 'koa-session'
+import fs from 'fs'
 
 import router from './routes/routes.js'
 
@@ -11,6 +12,13 @@ app.keys = ['darkSecret']
 
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
+
+// create directory for file uploads
+const privateDirectory = 'public/thumbs'
+
+if (!fs.existsSync(privateDirectory)) {
+    fs.mkdirSync(privateDirectory)
+}
 
 async function getHandlebarData(ctx, next) {
 	console.log(`${ctx.method} ${ctx.path}`)

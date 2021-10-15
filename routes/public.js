@@ -3,7 +3,6 @@ import Router from 'koa-router'
 import bodyParser from 'koa-body'
 
 const router = new Router()
-router.use(bodyParser({ multipart: true }))
 
 import Accounts from '../modules/accounts.js'
 import Items from '../modules/items.js'
@@ -20,7 +19,7 @@ router.get('/', async ctx => {
 	const allitems = await item.getItems()
 
 	ctx.hbs.items = allitems
-	console.log(ctx.hbs)
+	// console.log(ctx.hbs)
 
 	try {
 		await ctx.render('index', ctx.hbs)

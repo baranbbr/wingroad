@@ -22,6 +22,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@heroku/buildpack-registry": "^1.0.1",
 		"bcrypt": "^5.0.1",
 		"bcrypt-promise": "^2.0.0",
 		"handlebars": "^4.7.6",

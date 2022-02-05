@@ -71,8 +71,8 @@ class Items {
 		const descriptions = [
 			'Just painted get it now!',
 			'Took me 50 hours.',
-			'This piece is one of my best, I&apos;m really proud of it.',
-			'This took me 3 hours to create, it&apos;s my best yet.',
+			"This piece is one of my best, I'm really proud of it.",
+			"This took me 3 hours to create, it's my best yet.",
 		]
 		const randomDesc =
 			descriptions[Math.floor(Math.random() * descriptions.length)]

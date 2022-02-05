@@ -1,6 +1,57 @@
 :root {
-	--light-card: #ddd;
-	--dark-card: #6969db;
+	--light-card: rgb(255, 245, 188);
+	--dark-card: #6b6bdb;
+}
+
+.header-msg {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 50vw;
+	background-color: var(--light-card);
+	color: var(--dark);
+	padding: 20px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+@media (max-width: 600px) {
+	.header-msg {
+		width: 100%;
+	}
+	.header-msg p:nth-child(2) {
+		font-size: small;
+	}
+}
+
+@media (max-width: 350px) {
+	.header-msg p:nth-child(2) {
+		font-size: x-small;
+	}
+}
+
+.msg-close {
+	position: absolute;
+	right: 5px;
+	top: 0;
+	padding: 5px;
+	font-size: 1.25rem;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.msg-close:hover {
+	opacity: 1;
+}
+
+main a {
+	text-decoration: none;
+	background-color: #333;
+	padding: 0.5rem;
+	border-radius: 5px;
 }
 
 .card-container {
@@ -15,6 +66,8 @@
 	max-width: 100%;
 	margin: 1rem;
 	position: relative;
+	/* height: 80vh; */
+	/* overflow: hidden; */
 }
 
 .card img {
@@ -43,6 +96,16 @@
 	width: 100%;
 	height: 15px;
 	transform: skewX(45deg);
+}
+
+.card-info {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.card-field.status {
+	text-transform: capitalize;
 }
 
 @media (min-width: 640px) {

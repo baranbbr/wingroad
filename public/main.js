@@ -13,22 +13,33 @@ window.addEventListener('DOMContentLoaded', () => {
 // Open and Close Navigation Links
 const links = document.getElementById('navLinks')
 const navBtn = document.getElementById('navBtn')
+const themer = document
+	.getElementById('theme')
+	.addEventListener('click', () => {
+		btnToggles()
+	})
 
 const btnClose = document.getElementById('navClose')
 const btnBurger = document.getElementById('navBurger')
 btnClose.classList.add('hidden')
 
 navBtn.addEventListener('click', () => {
+	btnToggles()
+})
+
+const btnToggles = () => {
 	links.classList.toggle('hidden')
 	btnClose.classList.toggle('hidden')
 	btnBurger.classList.toggle('hidden')
-})
+}
 
 const theme = document.getElementById('theme')
 const body = document.querySelector('body')
 
 function isDarkModeEnabled() {
-	const enabled = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	const enabled =
+		window.matchMedia &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches
 	console.log(enabled)
 	return enabled
 }
@@ -40,6 +51,9 @@ theme.addEventListener('click', () => {
 	body.classList.toggle('dark')
 })
 
+document.querySelector('.msg-close').addEventListener('click', () => {
+	document.querySelector('.header-msg').classList.toggle('hidden')
+})
 
 // window.onscroll = function() {myFunction()};
 
@@ -54,5 +68,3 @@ theme.addEventListener('click', () => {
 //     	navbar.classList.remove("sticky");
 //   	}
 // }
-
-

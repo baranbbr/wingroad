@@ -6,11 +6,11 @@
 
 :root {
 	--light: #f9f9f9;
+	--light-nav: 249, 249, 249;
 	--light-link: #f09712;
-	--light-card: #9595ff;
 	--dark: #333333;
+	--dark-nav: 51, 51, 51;
 	--dark-link: #f4a123;
-	--dark-card: #6969db;
 }
 
 body {
@@ -35,7 +35,7 @@ body.dark .card {
 }
 
 body.dark .msg {
-		background-color: var(--dark-card);
+	background-color: var(--dark-card);
 }
 
 body.dark a {
@@ -47,11 +47,11 @@ body.dark a:visited {
 }
 
 body.dark #nav button {
-	color: var(--dark-link)
+	color: var(--dark-link);
 }
 
 body.dark #nav {
-	background-color: var(--dark);
+	background-color: rgb(var(--dark-nav), 0.9);
 }
 
 main {
@@ -69,12 +69,17 @@ main {
 }
 
 #nav {
-	z-index: 3;
-	background-color: var(--light);
+	z-index: 1;
+	background-color: rgb(var(--light-nav), 0.9);
+}
+
+#nav h1 {
+	margin: 0;
 }
 
 #navLinks {
 	padding: 0;
+	padding-bottom: 0.3rem;
 }
 
 #nav a {
@@ -86,11 +91,11 @@ main {
 	color: var(--light-link);
 }
 
-#nav a:visited {
+a:visited {
 	color: var(--light-link);
 }
 
- #nav button {
+#nav button {
 	color: var(--light-link);
 	margin-left: 2rem;
 	margin-top: 0.3rem;
@@ -117,15 +122,15 @@ main {
 }
 
 @media (min-width: 640px) {
-	#nav {	
+	#nav {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0 1rem;
+		padding: 0 0rem;
 		/* height: auto; */
 	}
 	.nav-heading {
-		padding: 0;
+		padding: 0.4rem 0;
 	}
 	.nav-buttons {
 		display: none;
@@ -134,11 +139,7 @@ main {
 		display: flex !important;
 		justify-content: space-around;
 	}
-	.nav-heading {
-		padding: 1rem 2rem;
-	}
 }
-
 
 /* formats the red message boxes */
 aside {
@@ -167,18 +168,17 @@ aside {
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
 	}
-	
+
 	70% {
 		transform: scale(1);
 		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
 	}
-	
+
 	100% {
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
 	}
 }
-
 
 input[type='submit'] {
 	border: 0;
@@ -198,16 +198,18 @@ input[type='submit']:hover {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+input[type='number'] {
+	-moz-appearance: textfield;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
 	font-size: 1rem;
 	max-width: 100%;
 	width: 100%;
@@ -220,7 +222,9 @@ textarea {
 }
 
 @media (min-width: 640px) {
-	input, textarea, select {
+	input,
+	textarea,
+	select {
 		width: 40ch;
 	}
 	input[type='submit'] {
@@ -232,7 +236,7 @@ textarea {
 		cursor: pointer;
 		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 	}
-	
+
 	input[type='submit']:hover {
 		background-color: var(--light-link);
 		transform: scale(1.1);
@@ -275,34 +279,35 @@ select {
 	background-color: #ffffff;
 	background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 	display: grid;
-	grid-template-areas: "select";
+	grid-template-areas: 'select';
 	align-items: center;
 }
 
-select, .select::after {
+select,
+.select::after {
 	grid-area: select;
 }
 
 .select::after {
-	content: "";
+	content: '';
 	z-index: 5;
 	width: 0.8em;
 	height: 0.5em;
 	background-color: #777777;
 	clip-path: polygon(100% 0%, 0 0%, 50% 100%);
 	justify-self: end;
-  }
+}
 
-main form {
+main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
+	flex-wrap: wrap;
 }
 
 main .card-field {
-	text-transform: capitalize;
-	border: 1px solid var(--light);
+	/* border: 1px solid var(--light); */
+	background-color: rgba(119, 119, 119, 0.25);
 	padding: 0.5rem;
 }
 
@@ -342,7 +347,7 @@ main button:hover {
 	transition: all 0.3s ease-in-out;
 }
 
-main a {
+main .new-item {
 	border: 1px solid pink;
 	position: fixed;
 	right: 5vh;

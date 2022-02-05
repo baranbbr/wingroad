@@ -1,4 +1,3 @@
-
 /** @module Accounts */
 
 import bcrypt from 'bcrypt-promise'
@@ -12,20 +11,22 @@ const saltRounds = 10
  */
 class Accounts {
 	/**
-   * Create an account object
-   * @param {String} [dbName=":memory:"] - The name of the database file to use.
-   */
+	 * Create an account object
+	 * @param {String} [dbName=":memory:"] - The name of the database file to use.
+	 */
 	constructor(dbName = ':memory:') {
-		return (async() => {
+		return (async () => {
 			this.db = await sqlite.open(dbName)
-			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
+			const sqlItems =
+				'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
 				userID INTEGER, description TEXT, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
 				FOREIGN KEY (userID) REFERENCES users(id));'
 			await this.db.run(sqlItems)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS \
-			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
+			const sql =
+				'CREATE TABLE IF NOT EXISTS \
+			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone VARCHAR(13));'
 			await this.db.run(sql)
 			return this
 		})()
@@ -40,16 +41,25 @@ class Accounts {
 	 * @returns {Boolean} returns true if the new user has been added
 	 */
 	async register(user, pass, email, phone) {
-		Array.from(arguments).forEach(val => {
+		Array.from(arguments).forEach((val) => {
 			if (val.length === 0) throw new Error('missing field')
 		})
-		const data = await this.db.get('SELECT COUNT(id) as records FROM users WHERE user=?;', [user])
+		const data = await this.db.get(
+			'SELECT COUNT(id) as records FROM users WHERE user=?;',
+			[user]
+		)
 		if (data.records !== 0) throw new Error('Username already in use.')
-		const emails = await this.db.get('SELECT COUNT(id) as records FROM users WHERE email=?;', [email])
+		const emails = await this.db.get(
+			'SELECT COUNT(id) as records FROM users WHERE email=?;',
+			[email]
+		)
 		if (emails.records !== 0) throw new Error('Email is already in use.')
 		pass = await bcrypt.hash(pass, saltRounds)
-		await this.db.run('INSERT INTO users(user, pass, email, phone)\
-		VALUES(?, ?, ?, ?)', [user, pass, email, phone])
+		await this.db.run(
+			'INSERT INTO users(user, pass, email, phone)\
+		VALUES(?, ?, ?, ?)',
+			[user, pass, email, phone]
+		)
 		return true
 	}
 
@@ -60,10 +70,15 @@ class Accounts {
 	 * @returns {Integer} returns id of account
 	 */
 	async login(username, password) {
-		const record = await this.db.get('SELECT id FROM users WHERE user=?;', [username])
+		const record = await this.db.get('SELECT id FROM users WHERE user=?;', [
+			username,
+		])
 
-		if (record === undefined) throw new Error('Username couldn\'t be found')
-		const passRecord = await this.db.get('SELECT pass FROM users WHERE user= ?;', [username])
+		if (record === undefined) throw new Error("Username couldn't be found")
+		const passRecord = await this.db.get(
+			'SELECT pass FROM users WHERE user= ?;',
+			[username]
+		)
 		const valid = await bcrypt.compare(password, passRecord.pass)
 		if (valid === false) throw new Error('Account details are incorrect.')
 		return record.id
@@ -72,7 +87,7 @@ class Accounts {
 	 * registers a demo account for the purpose of adding demo items
 	 */
 	async registerDemoAccount() {
-		await this.register('demo', 'demo', 'demo@demo.com', '0123456')
+		await this.register('demo', 'demo', 'demo@demo.com', '07456789012')
 		return true
 	}
 

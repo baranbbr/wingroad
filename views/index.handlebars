@@ -1,63 +1,81 @@
-<!doctype html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-	<meta charset="utf-8">
-	<title>Home Page</title>
-	<meta name="description" content="Artists, designers and photographers can sell their pieces.">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
-	<meta name="author" content="Baran Babur">
-	<link href="styles/style.css" rel="stylesheet" />
-	<link href="styles/index.css" rel="stylesheet" />
-</head>
+	<head>
+		<meta charset='utf-8' />
+		<title>Home Page</title>
+		<meta
+			name='description'
+			content='Artists, designers and photographers can sell their pieces.'
+		/>
+		<meta
+			name='viewport'
+			content='width=device-width; initial-scale=1.0;'
+		/>
+		<meta name='author' content='Baran Babur' />
+		<link href='styles/style.css' rel='stylesheet' />
+		<link href='styles/index.css' rel='stylesheet' />
+	</head>
 
-<body>
-	<header id="nav" class="sticky">
-		<div class="nav-heading">
-			<h1>
-				<a href="/">Wingroad</a>
-			</h1>
-			<div class="nav-buttons">
-				<button type="button" id="navBtn">
-					<i class="fas fa-bars" id="navBurger"></i>
-					<i class="fas fa-times hidden" id="navClose"></i>
-				</button>
+	<body>
+		<header id='nav' class='sticky'>
+			<div class='nav-heading'>
+				<h1>
+					<a href='/'>Wingroad</a>
+				</h1>
+				<div class='nav-buttons'>
+					<button type='button' id='navBtn'>
+						<i class='fas fa-bars' id='navBurger'></i>
+						<i class='fas fa-times hidden' id='navClose'></i>
+					</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="hidden" id="navLinks">
-			{{#if authorised}}
-			<a href="/sell">Sell</a>
-			<a href="/logout">Log out</a>
-			{{else}}
-			<a href="/login">Log in</a>
-			<a href="/register">Register</a>
-			{{/if}}
-			<button id="theme">Toggle Theme</button>
-		</div>
-	</header>
-	{{#if msg}}
-	<aside>
-		<p class="msg">{{msg}}</p>
-	</aside>
-	{{/if}}
-	<main>
-		<p>Welcome to Wingroad, here you will find all the listings by every user!</p>
-		<section class="card-container">
-			{{#each items}}
-			<article class="card">
-				<img src="{{thumbnail}}" loading="lazy" alt="">
-				<h1 class="card-heading">{{name}}</h1>
-				<p class="card-field">Price: £{{price}}</p>
-				<p class="card-field status">Status: {{status}}</p>
-				<p class="card-field">By: {{user}}</p>
-				<p class="card-field">Phone: {{phone}}</p>
-			</article>
-			{{/each}}
-		</section>
-	</main>
-	<script src="https://kit.fontawesome.com/5fb363ed32.js" crossorigin="anonymous"></script>
-	<script type="module" src="main.js"></script>
-</body>
+			<div class='hidden' id='navLinks'>
+				{{#if authorised}}
+					<a href='/sell'>Sell</a>
+					<a href='/logout'>Log out</a>
+				{{else}}
+					<a href='/login'>Log in</a>
+					<a href='/register'>Register</a>
+				{{/if}}
+				<button id='theme'>Toggle Theme</button>
+			</div>
+		</header>
+		{{#if msg}}
+			<aside>
+				<p class='msg'>{{msg}}</p>
+			</aside>
+		{{/if}}
+		<main>
+			<div class='header-msg'>
+				<p>Welcome to Wingroad, here you will find all
+					listings by every user.</p>
+				<p>Get started by creating an account
+					<a href='/register'>Register</a>
+				</p>
+				<span class='msg-close'>x</span>
+			</div>
+			<section class='card-container'>
+				{{#each items}}
+					<article class='card'>
+						<img src='{{thumbnail}}' loading='lazy' alt='' />
+						<h1 class='card-heading'>{{name}}</h1>
+						<p class='card-field'>{{description}}</p>
+						<p class='card-field'>Phone: {{phone}}</p>
+						<div class='card-info'>
+							<p class='card-field'>Price: £{{price}}</p>
+							<p class='card-field status'>Status: {{status}}</p>
+						</div>
+						<button class='btn'>Buy it now</button>
+					</article>
+				{{/each}}
+			</section>
+		</main>
+		<script
+			src='https://kit.fontawesome.com/5fb363ed32.js'
+			crossorigin='anonymous'
+		></script>
+		<script type='module' src='main.js'></script>
+	</body>
 
 </html>

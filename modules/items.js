@@ -10,17 +10,19 @@ const dbName = 'website.db'
  */
 class Items {
 	/**
-   * Create a home object
-   * @param {String} [dbName=":memory:"] - The name of the database file to use.
-   */
+	 * Create a home object
+	 * @param {String} [dbName=":memory:"] - The name of the database file to use.
+	 */
 	constructor(dbName = ':memory:') {
-		return (async() => {
+		return (async () => {
 			this.db = await sqlite.open(dbName)
-			const sql = 'CREATE TABLE IF NOT EXISTS \
+			const sql =
+				'CREATE TABLE IF NOT EXISTS \
 			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
 			await this.db.run(sql)
 			// we need this table to store the items of users
-			const sqlItems = 'CREATE TABLE IF NOT EXISTS items\
+			const sqlItems =
+				'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\
 				userID INTEGER, description TEXT, uploadtime DATETIME DEFAULT CURRENT_TIMESTAMP,\
 				FOREIGN KEY (userID) REFERENCES users(id));'
@@ -32,16 +34,18 @@ class Items {
 	 * retrieves all items from table items as well as which user added item
 	 */
 	async getItems() {
-		const sql = 'SELECT items.*, users.user, users.phone\
+		const sql =
+			'SELECT items.*, users.user, users.phone\
 		FROM items, users WHERE items.userID=users.id ORDER BY uploadtime DESC'
 		let items = await this.db.all(sql)
 		console.log(`items are: ${items}`)
 		console.log(`items length: ${items.length}`)
+
 		if (items.length === 0) {
 			const account = await new Accounts(dbName)
 			await account.registerDemoAccount()
 			for (let i = 0; i <= 5; i++) {
-				await this.addDemoItem(`Demo item #${i}`)
+				await this.addDemoItem(`Demo item ${i}`)
 			}
 		}
 		items = await this.db.all(sql)
@@ -51,7 +55,10 @@ class Items {
 	 * retrieves all items that are listed by the current logged in user
 	 */
 	async getUserItems(id) {
-		const items = await this.db.all('SELECT * FROM items WHERE userID=? ORDER BY uploadtime', [id])
+		const items = await this.db.all(
+			'SELECT * FROM items WHERE userID=? ORDER BY uploadtime',
+			[id]
+		)
 		return items
 	}
 	/**
@@ -59,12 +66,25 @@ class Items {
 	@param {String} name name of the item
 	 */
 	async addDemoItem(name) {
-		const rimgSize = Math.floor(Math.random() * (550 - 450) + 450)
-		const rPrice = Math.floor(Math.random() * (1000 - 10) + 10)
-		const descriptions = ['Just painted get it now!', 'Took me 50 hours.', 'This piece is one of my best.']
-		const rDesc = descriptions[Math.floor(Math.random()*descriptions.length)]
+		const randomimgSize = Math.floor(Math.random() * (550 - 450) + 450)
+		const randomPrice = Math.floor(Math.random() * (1000 - 10) + 10)
+		const descriptions = [
+			'Just painted get it now!',
+			'Took me 50 hours.',
+			'This piece is one of my best, I&apos;m really proud of it.',
+			'This took me 3 hours to create, it&apos;s my best yet.',
+		]
+		const randomDesc =
+			descriptions[Math.floor(Math.random() * descriptions.length)]
 
-		await this.userItem(name, `https://unsplash.it/${rimgSize}`, rPrice, "for sale", 1, rDesc)
+		await this.userItem(
+			name,
+			`https://unsplash.it/${randomimgSize}`,
+			randomPrice,
+			'for sale',
+			1,
+			randomDesc
+		)
 	}
 	/**
 	 * adds a new item
@@ -75,12 +95,15 @@ class Items {
 	 * @param {Integer} userID the user adding the item for sale
 	 */
 	async addItem(name, thumbnail, price, status, userID) {
-		Array.from(arguments).forEach(val => {
+		Array.from(arguments).forEach((val) => {
 			if (val.length === 0) throw new Error('missing field')
 			return false
 		})
-		await this.db.run('INSERT INTO items(name, thumbnail, price, status, userID)\
-		VALUES(?, ?, ?, ?, ?);', [name, thumbnail, price, status, userID])
+		await this.db.run(
+			'INSERT INTO items(name, thumbnail, price, status, userID)\
+		VALUES(?, ?, ?, ?, ?);',
+			[name, thumbnail, price, status, userID]
+		)
 		return true
 	}
 	/**
@@ -93,12 +116,15 @@ class Items {
 	 * @param {String} description description of item
 	 */
 	async userItem(name, thumbnail, price, status, userID, description) {
-		Array.from(arguments).forEach(val => {
+		Array.from(arguments).forEach((val) => {
 			if (val.length === 0) throw new Error('missing field')
 			return false
 		})
-		await this.db.run('INSERT INTO items(name, thumbnail, price, status, userID, description) \
-		VALUES(?, ?, ?, ?, ?, ?);', [name, thumbnail, price, status, userID, description])
+		await this.db.run(
+			'INSERT INTO items(name, thumbnail, price, status, userID, description) \
+		VALUES(?, ?, ?, ?, ?, ?);',
+			[name, thumbnail, price, status, userID, description]
+		)
 		return true
 	}
 	/**
@@ -114,14 +140,17 @@ class Items {
 	 * upates the status of an item
 	 * @param {String} status new status of the item
 	 * @param {Integer} id id of the item being deleted
-	*/
+	 */
 	async update(status, id) {
-		await this.db.run('UPDATE items SET status=? WHERE itemID=?;', [status, id])
+		await this.db.run('UPDATE items SET status=? WHERE itemID=?;', [
+			status,
+			id,
+		])
 		return true
 	}
 	/**
 	 * closes connection to database
-	*/
+	 */
 	async close() {
 		await this.db.close()
 	}

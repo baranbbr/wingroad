@@ -55,8 +55,6 @@ class Accounts {
 		)
 		if (emails.records !== 0) throw new Error('Email is already in use.')
 		pass = await bcrypt.hash(pass, saltRounds)
-		phone = String(phone).padStart(1, '0')
-		console.log(phone)
 		await this.db.run(
 			'INSERT INTO users(user, pass, email, phone)\
 		VALUES(?, ?, ?, ?)',
@@ -89,7 +87,7 @@ class Accounts {
 	 * registers a demo account for the purpose of adding demo items
 	 */
 	async registerDemoAccount() {
-		await this.register('demo', 'demo', 'demo@example.com', '07456789012')
+		await this.register('demo', 'demo', 'demo@example.com', '07701111000')
 		return true
 	}
 

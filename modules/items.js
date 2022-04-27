@@ -73,7 +73,7 @@ class Items {
 			'An inspiring piece I painted in my free time.',
 			'A beautiful painting of a beautiful scene.',
 			'This piece is one of my best, it took me 3 weeks to create.',
-			"Im not sure what this is, but it's beautiful.",
+			"I'm not sure what this is, but it's beautiful.",
 			'There is beauty in the details of this one.',
 			'Mysterious and magical.',
 		]

@@ -18,6 +18,11 @@ router.get('/', async ctx => {
 	const item = await new Items(dbName)
 	const allitems = await item.getItems()
 
+	allitems.forEach(items => {
+		items.phone = String(items.phone).padStart(11, '0')
+		items.phone = [items.phone.slice(0, 5), ' ', items.phone.slice(5)].join('')
+		console.log(items.phone)
+	});
 	ctx.hbs.items = allitems
 	// console.log(ctx.hbs)
 

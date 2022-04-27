@@ -43,9 +43,10 @@ class Items {
 
 		if (items.length === 0) {
 			const account = await new Accounts(dbName)
+			const imgIDs = [121, 1015, 1022, 1028, 1069, 1002]
 			await account.registerDemoAccount()
 			for (let i = 0; i <= 5; i++) {
-				await this.addDemoItem(`Demo item ${i}`)
+				await this.addDemoItem(`Demo item ${i}`, imgIDs[i])
 			}
 		}
 		items = await this.db.all(sql)
@@ -65,21 +66,23 @@ class Items {
 	* adds a new demo item with pre-set values and a random image
 	@param {String} name name of the item
 	 */
-	async addDemoItem(name) {
-		const randomimgSize = Math.floor(Math.random() * (550 - 450) + 450)
+	async addDemoItem(name, imgID = Math.floor(Math.random() * (550 - 450) + 450)) {
+		// const randomimgSize = Math.floor(Math.random() * (550 - 450) + 450)
 		const randomPrice = Math.floor(Math.random() * (1000 - 10) + 10)
 		const descriptions = [
-			'Just painted get it now!',
-			'Took me 50 hours.',
-			"This piece is one of my best, I'm really proud of it.",
-			"This took me 3 hours to create, it's my best yet.",
+			'An inspiring piece I painted in my free time.',
+			'A beautiful painting of a beautiful scene.',
+			'This piece is one of my best, it took me 3 weeks to create.',
+			"Im not sure what this is, but it's beautiful.",
+			'There is beauty in the details of this one.',
+			'Mysterious and magical.',
 		]
 		const randomDesc =
 			descriptions[Math.floor(Math.random() * descriptions.length)]
 
 		await this.userItem(
 			name,
-			`https://unsplash.it/${randomimgSize}`,
+			`https://unsplash.it/id/${imgID}/500`,
 			randomPrice,
 			'for sale',
 			1,

@@ -113,8 +113,8 @@ class Items {
 	 * adds a new user item (with description)
 	 * @param {String} name the name of the item being added
 	 * @param {String} thumbnail an image of the item being added
-	 * @param {String} status status of the item
 	 * @param {Integer} price the price of the item being added
+	 * @param {String} status status of the item
 	 * @param {Integer} userID the user adding the item for sale
 	 * @param {String} description description of item
 	 */

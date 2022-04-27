@@ -145,12 +145,11 @@ a:visited {
 aside {
 	max-width: 30vw;
 	margin: auto;
-	position: absolute;
 	top: 10vh;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 4;
-	position: fixed;
+	z-index: 100;
+	position: absolute;
 }
 
 .msg {
@@ -303,11 +302,12 @@ main {
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
+	flex-direction: column;
 }
 
 main .card-field {
 	/* border: 1px solid var(--light); */
-	background-color: rgba(119, 119, 119, 0.25);
+	/* background-color: rgba(119, 119, 119, 0.25); */
 	padding: 0.5rem;
 }
 
@@ -328,6 +328,7 @@ main button {
 	cursor: pointer;
 	border-radius: 0.3rem;
 	font-size: 1rem;
+	transition: all 0.25s ease-in-out;
 	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -343,8 +344,7 @@ main button.delete {
 }
 
 main button:hover {
-	transform: scale(1.1);
-	transition: all 0.3s ease-in-out;
+	transform: scale(1.05);
 }
 
 main .new-item {

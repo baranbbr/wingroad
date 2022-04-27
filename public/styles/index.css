@@ -1,6 +1,6 @@
 :root {
 	--light-card: rgb(255, 245, 188);
-	--dark-card: #6b6bdb;
+	--dark-card: rgb(240, 153, 23);
 }
 
 .header-msg {
@@ -62,12 +62,23 @@ main a {
 
 .card {
 	background-color: var(--light-card);
-	padding: 1rem;
 	max-width: 100%;
 	margin: 1rem;
 	position: relative;
-	/* height: 80vh; */
-	/* overflow: hidden; */
+	transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+	scale: 1.03;
+}
+
+.card-heading {
+	text-transform: capitalize
+}
+
+.card-item {
+	padding: 0 1rem 1rem 1rem;
 }
 
 .card img {
@@ -76,7 +87,7 @@ main a {
 	object-fit: contain;
 }
 
-.card::after {
+/* .card::after {
 	content: '';
 	background-color: #f6e58d;
 	position: absolute;
@@ -85,9 +96,9 @@ main a {
 	height: 100%;
 	width: 15px;
 	transform: skewY(45deg);
-}
+} */
 
-.card::before {
+/* .card::before {
 	content: '';
 	background-color: #f9ca24;
 	position: absolute;
@@ -96,7 +107,7 @@ main a {
 	width: 100%;
 	height: 15px;
 	transform: skewX(45deg);
-}
+} */
 
 .card-info {
 	display: flex;

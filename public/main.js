@@ -55,6 +55,42 @@ document.querySelector('.msg-close').addEventListener('click', () => {
 	document.querySelector('.header-msg').classList.toggle('hidden')
 })
 
+// when img in article is clicked, open a modal showing fullscreen image
+const imgs = document.querySelectorAll('article img')
+imgs.forEach(img => {
+	img.addEventListener('click', () => {
+		showModal(img);
+	})
+})
+
+function showModal(el) {
+	// create modal
+	const modal = document.createElement('div')
+	modal.innerHTML = `
+		<div class="modal-content">
+			<span class="modal-close" id="modal-close">&times;</span>
+			<img src="${el.src}" alt="${el.alt}">
+		</div>
+	`
+	document.body.appendChild(modal)
+	// allow zoom in to modal image
+	const modalImg = document.querySelector('.modal-content img')
+	modalImg.addEventListener('click', () => {
+		modalImg.classList.toggle('zoom')
+	})
+	// close modal
+	const close = document.getElementById('modal-close')
+	// allow escape key to close modal
+	document.addEventListener('keydown', e => {
+		if (e.key == 'Escape') {
+			modal.remove()
+		}
+	})
+	close.addEventListener('click', () => {
+		modal.remove()
+	})
+}
+
 // window.onscroll = function() {myFunction()};
 
 // var navbar = document.getElementById("nav");

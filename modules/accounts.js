@@ -1,7 +1,7 @@
 /** @module Accounts */
 
 import bcrypt from 'bcrypt-promise'
-import sqlite from 'sqlite-async'
+import { Database } from 'sqlite-async'
 
 const saltRounds = 10
 
@@ -16,7 +16,7 @@ class Accounts {
 	 */
 	constructor(dbName = ':memory:') {
 		return (async () => {
-			this.db = await sqlite.open(dbName)
+			this.db = await Database.open(dbName)
 			const sqlItems =
 				'CREATE TABLE IF NOT EXISTS items\
 				(itemID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, thumbnail TEXT, price INTEGER, status TEXT,\

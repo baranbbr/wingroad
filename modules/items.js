@@ -1,6 +1,6 @@
 /** @module Items */
 
-import sqlite from 'sqlite-async'
+import { Database } from 'sqlite-async'
 import Accounts from './accounts.js'
 
 const dbName = 'website.db'
@@ -15,7 +15,7 @@ class Items {
 	 */
 	constructor(dbName = ':memory:') {
 		return (async () => {
-			this.db = await sqlite.open(dbName)
+			this.db = await Database.open(dbName)
 			const sql =
 				'CREATE TABLE IF NOT EXISTS \
 			users(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT, email TEXT, phone INTEGER);'
